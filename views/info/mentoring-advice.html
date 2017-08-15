@@ -1,0 +1,112 @@
+{{> includes-head}}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<body>
+  {{#isAuthenticated}}
+    {{> includes-logged-in-menu}}  
+  {{/isAuthenticated}}
+  {{^isAuthenticated}}
+    {{> includes-menu}}  
+  {{/isAuthenticated}}
+  {{> includes-header}} 
+  <div class="row">
+    <div class="small-12 columns" style="color:black; background-color:#34B3AA; color: white; font-size: 16px; margin-bottom:20px">
+      <h3 style="padding-bottom:30px;">Getting started</h3>
+      <div class="small-2 columns">
+        <div class="skill-circle skill-circle-red">
+        <div class="skill-centre"><i class="fa fa-keyboard-o skill-icon" aria-hidden="true"></i></div>
+        </div>
+        <div class="skill-label">Identify mentor(s)</div>
+      </div>
+      <div class="small-2 columns">
+        <div class="skill-circle skill-circle-red">
+        <div class="skill-centre"><i class="fa fa-envelope-o skill-icon" aria-hidden="true"></i></div>
+        </div>
+        <div class="skill-label">Get in touch</div>
+      </div>
+      <div class="small-2 columns">
+        <div class="skill-circle skill-circle-red">
+        <div class="skill-centre" id="puzzle"><i class="fa fa-map-signs skill-icon" aria-hidden="true"></i></div>
+        </div>
+        <div class="skill-label">Arrange to meet</div>
+      </div>
+      <div class="small-2 columns">
+        <div class="skill-circle skill-circle-red">
+        <div class="skill-centre"><i class="fa fa-binoculars skill-icon" aria-hidden="true"></i></div>
+        </div>
+        <div class="skill-label">Identify goals</div>
+      </div>
+      <div class="small-2 columns">
+        <div class="skill-circle skill-circle-red">
+        <div class="skill-centre"><i class="fa fa-clock-o skill-icon" aria-hidden="true"></i></div>
+        </div>
+        <div class="skill-label">Set timetable</div>
+      </div>
+      <div class="small-2 columns">
+        <div class="skill-circle skill-circle-red">
+        <div class="skill-centre"><i class="fa fa-coffee skill-icon" aria-hidden="true"></i></div>
+        </div>
+        <div class="skill-label">Meet</div>
+      </div>
+    </div>
+    <div class="small-12 columns" style="padding-top:20px">
+      <span style="font-weight: bold;">To get the most from your mentor/mentee relationship</span> 
+      <ul style="padding:20px 0 0 50px">
+        <li>Think about what you'd like to achieve before you even meet up</li>
+        <li>We've given you a limit of 4 emails a week so make the most of them, not every mentor match will be the right one so it's worth approaching several people</li>
+        <li>The more of your profile you fill out, the more </li>
+      </ul>
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 columns" style="color:black; background-color:#34B3AA; color: white; font-size: 16px; margin-bottom:20px">
+      <h3 style="padding-bottom:30px;">Career planning</h3>
+      <div class="small-2 columns">
+        <div class="skill-circle skill-circle-red">
+        <div class="skill-centre"><i class="fa fa-keyboard-o skill-icon" aria-hidden="true"></i></div>
+        </div>
+        <div class="skill-label">Define goals</div>
+      </div>
+      <div class="small-2 columns">
+        <div class="skill-circle skill-circle-red">
+        <div class="skill-centre"><i class="fa fa-envelope-o skill-icon" aria-hidden="true"></i></div>
+        </div>
+        <div class="skill-label">Explore where you are</div>
+      </div>
+      <div class="small-2 columns">
+        <div class="skill-circle skill-circle-red">
+        <div class="skill-centre" id="puzzle"><i class="fa fa-map-signs skill-icon" aria-hidden="true"></i></div>
+        </div>
+        <div class="skill-label">Identify opportunities</div>
+      </div>
+      <div class="small-2 columns">
+        <div class="skill-circle skill-circle-red">
+        <div class="skill-centre"><i class="fa fa-binoculars skill-icon" aria-hidden="true"></i></div>
+        </div>
+        <div class="skill-label">Help others learn</div>
+      </div>
+      <div class="small-2 columns">
+        <div class="skill-circle skill-circle-red">
+        <div class="skill-centre"><i class="fa fa-clock-o skill-icon" aria-hidden="true"></i></div>
+        </div>
+        <div class="skill-label">Set timetable</div>
+      </div>
+      <div class="small-2 columns">
+        <div class="skill-circle skill-circle-red">
+        <div class="skill-centre"><i class="fa fa-coffee skill-icon" aria-hidden="true"></i></div>
+        </div>
+        <div class="skill-label">Meet</div>
+      </div>
+    </div>
+    <div class="small-12 columns" style="padding-top:20px">
+      <span style="font-weight: bold;">To get the most from your mentor/mentee relationship</span> 
+      <ul style="padding:20px 0 0 50px">
+        <li>Think about what you'd like to achieve before you even meet up</li>
+        <li>We've given you a limit of 4 emails a week so make the most of them, not every mentor match will be the right one so it's worth approaching several people</li>
+        <li>The more of your profile you fill out, the more </li>
+      </ul>
+      <hr>
+    </div>
+  </div>
+</body>

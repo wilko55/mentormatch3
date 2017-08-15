@@ -1,0 +1,67 @@
+{{< layout}}
+  {{$content}}
+    <div class="row">
+      <div class="header-panel profile-panel">
+        <h1>Emails</h1>
+      </div>
+      <h2 class="section-title">Sent <label>click to open</label></h4>
+      <table class="table large-12">
+        <thead>
+          <tr>
+            <th width="300">To</th>
+            <!-- <th width="700">Message</th> -->
+            <th width="100">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#sent}}
+          <tr class="inbox-row" id="reveal-{{id}}" onclick="revealMessage('sent', {{id}});">
+              <td>{{name}}</td>
+              <!-- <td>{{message}}</td> -->
+              <td>{{timestamp}}</td>
+          </tr>
+          <tr class="message" id="show-sent-{{id}}">
+            <td colspan="4">{{emailBody}}</td>
+          </tr>
+          {{/sent}}
+        </tbody>
+      </table>
+
+      <h2 class="section-title">Received <label>click to open</label></h4>
+      <table class="table large-12">
+        <thead>
+          <tr id="reveal-{{id}}">
+            <th width="300">From</th>
+            <!-- <th width="700">Message</th> -->
+            <th width="100">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#received}}
+          <tr class="inbox-row" id="reveal-{{id}}" onclick="revealMessage('received', {{id}});">
+              <td>{{name}}</td>
+              <!-- <td>{{message}}</td> -->
+              <td>{{timestamp}}</td>
+          </tr>
+          <tr class="message" id="show-received-{{id}}">
+            <td colspan="4">{{emailBody}}
+            <br>
+              <a href="reply/{{idHash}}" style="float:right"><button class="button">Reply</button></a>
+            </td>
+          </tr>
+          {{/received}}
+        </tbody>
+      </table>
+    </div>
+
+  <script>
+    $(document).ready(function () {
+      $(".message").hide();
+    })
+
+    function revealMessage(sent, id){
+      $("#show-" + sent + "-" + id).toggle()
+    }
+  </script>
+  {{/content}}
+{{/layout}}

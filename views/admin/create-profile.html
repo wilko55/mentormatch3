@@ -1,0 +1,33 @@
+{{> includes-head}}
+{{> includes-admin-menu}}
+{{> includes-header}}
+    <body>
+        <div class="row">
+            <h1>Create new user</h1>
+            <p>This page lets you create a blank profile for someone if they're having trouble signing themselves up or validating their email.<br>
+            On setting them a login email, civil service email (can be the same as login) and password, you can then email the user their new login details.</p>
+            <p>Upon logging in, they will have to set themselves a new password and update their profile.</p>
+            <hr>
+            <div class="large-12 columns">
+                {{#msg}}<span class="error-message">{{msg}}</span>{{/msg}}
+                <form action="/admin/tools/create-profile" method="POST">
+                  <label>Login/signup email (required):
+                    <input name="email"></input>
+                  </label>
+                  <label>CS email (required):
+                    <input name="csEmail"></input>
+                  </label>
+                  <label>Password (required):
+                    <input name="password"></input>
+                  </label>
+                  <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                  <input type="submit" value="Add user">
+                </form>
+            </div>
+            <hr>
+            <div class="large-12">
+
+            </div>
+        </div>
+    </body>
+</html>

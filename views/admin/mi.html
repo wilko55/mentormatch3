@@ -1,0 +1,164 @@
+{{> includes-head}}
+{{> includes-admin-menu}}
+{{> includes-header}}
+
+<body>
+    <div class="row">
+        <h1>MI</h1>
+        <hr>
+        <div class="large-6 columns">
+            <h4>Stats</h4>
+            <div class="small-6 medium-3 large-6 columns">
+                <div class="row stat-container" style="text-align:center">
+                    <div class="large-12 columns">
+                        <span style="font-size: 18px">Mentors registered</span>
+                    </div>
+                    <div class="large-12 columns">
+                        <span style="font-weight: bold; font-size:50px;">{{numberOfMentors}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="small-6 medium-3 large-6 columns">
+                <div class="row stat-container" style="text-align:center">
+                    <div class="large-12 columns">
+                        <span style="font-size: 18px">Validated mentors</span>
+                    </div>
+                    <div class="large-12 columns">
+                        <span style="font-weight: bold; font-size:50px;">{{csVerifiedCount}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="small-6 medium-3 large-6 columns">
+                <div class="row stat-container" style="text-align:center">
+                    <div class="large-12 columns">
+                        <span style="font-size: 18px">Enquiry emails sent (total)</span>
+                    </div>
+                    <div class="large-12 columns">
+                        <span style="font-weight: bold; font-size:50px;">{{emailMi.sentEmails}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="small-6 medium-3 large-6 columns">
+                <div class="row stat-container" style="text-align:center">
+                    <div class="large-12 columns">
+                        <span style="font-size: 18px">Replies sent (total)</span>
+                    </div>
+                    <div class="large-12 columns">
+                        <span style="font-weight: bold; font-size:50px;">{{emailMi.replies}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="large-12 columns">
+            <h4>Grade breakdown</h4>
+            <table class="table large-12" style="color:black !important">
+                <thead>
+                    <tr>
+                        <th width="200">Grade</th>
+                        <th width="200">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#grades}}
+                        <tr>
+                            <td>{{grade}}</td>
+                            <td>{{total}}</td>
+                        </tr>
+                    {{/grades}}
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <div class="large-6 columns">
+            <h4>Verified account breakdown</h4>
+            <table class="table large-12" style="color:black !important">
+                <thead>
+                    <tr>
+                        <th width="200">Dept</th>
+                        <th width="200">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#emailBreakdown}}
+                        <tr>
+                            <td>{{emailType}}</td>
+                            <td>{{total}}</td>
+                        </tr>
+                    {{/emailBreakdown}}
+                </tbody>
+            </table>
+        </div>
+        <hr>
+    </div>
+    <!-- <div class="row">
+        <button class="button" id="editButton" style="background-color: #D03906; float:right;">Edit feedback replied status</button>
+        <form method="POST" id="feedbackForm" action="/admin/update-feedback">
+            <button class="button editToggle saveButton" style="display:none; float:right; background-color: #D03906;" >Save</button>
+            <h4>Feedback (last 40 comments not replied to)</h4>
+            <div class="large-12">
+                <table class="table large-12" style="color:black !important">
+                    <thead>
+                        <tr>
+                            <th width="300">Name</th>
+                            <th width="700">Comment</th>
+                            <th width="200">Email</th>
+                            <th width="100">Timestamp</th>
+                            <th width="50">Replied</th>
+                            <th class="editToggle" width="50" style="display:none;">Edit reply status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#feedback}}
+                        <tr>
+                            <td>{{name}}</td>
+                            <td>{{comment}}</td>
+                            <td>{{email}}</td>
+                            <td>{{timestamp}}</td>
+                            {{#replied}}
+                            <td style="background-color: green; border-bottom: solid #f1f1f1 2px; text-align: center">Yep</td>
+                            {{/replied}}
+                            {{^replied}}
+                            <td style="background-color: red; border-bottom: solid #f1f1f1 2px; text-align: center">Nope</td>
+                            {{/replied}}
+                            <td class="editToggle" style="display:none; text-align: center;" for="{{id}}">
+                                {{#replied}}
+                                    <label>Yes
+                                        <input type="radio" id="{{id}}" name="{{id}}" value="1" checked>
+                                    </label>
+                                    <label>No
+                                        <input type="radio" id="{{id}}" name="{{id}}" value="0">
+                                    </label>
+                                {{/replied}}
+                                {{^replied}}
+                                    <label>Yes
+                                        <input type="radio" id="{{id}}" name="{{id}}" value="1">
+                                    </label>
+                                    <label>No
+                                        <input type="radio" id="{{id}}" name="{{id}}" value="0" checked>
+                                    </label>
+                                {{/replied}}
+                            </td>
+                        </tr>
+                        {{/feedback}}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div> -->
+
+</body>
+
+<script>
+    $(document).ready(function (){
+
+      $('#editButton').click(function () {
+        $(".editToggle").show();
+        $("#editButton").hide();
+      })
+
+      $('.saveButton').click(function () {
+        $(".editToggle").show();
+      })
+    })
+
+</script>
+</html>

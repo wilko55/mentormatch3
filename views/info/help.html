@@ -1,0 +1,224 @@
+{{< layout}}
+  {{$content}}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+  <style>
+    #faq p {
+      margin-bottom: 8px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    #faq ul {
+      margin-bottom: 8px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    #faq h4 {
+      margin-top: 5px;
+      display: inline
+    }
+    .faq-question-container {
+      width: 100%;
+      margin: 5px 0 5px 0;
+      /*padding-left: -15px;*/
+    }
+    .faq-question {
+      background-color: #34B3AA;
+      color: white;
+      /*font-size: 16px; */
+      margin-bottom: 5px;
+      margin-top: 10px;
+      padding: 5px;
+      margin-left: -10px;
+    }
+    .answer {
+      display: none;
+    }
+  </style>
+  <script>
+    var reveal = function (id) {
+      $('#'+id).toggle()
+    }
+  </script>
+  <div class="row" id="faq">
+    <div class="header-panel profile-panel bottom-margin">
+      <h1>A guide for coaches and mentors</h1>
+    </div>
+    <!-- <div class="small-12 columns" style="color:black; background-color:#34B3AA; color: white; font-size: 16px; margin-bottom:20px"> -->
+    <!-- </div> -->
+    <p>Mentor Match is committed to the development of all staff within the civil service. We provide a bespoke digital platform to match individuals based on skills enabling everyone involved to find the right mentor or mentee across the Government.</p>
+    <p>Our aim is always to support the development of skills and to help improve diversity across the civil service.</p>
+    <p>We do not believe that you have to have training to be a good mentor, but there are good training courses available, information about which you can find below.</p>
+    <p>We hope that the information below answers any questions you might have about the process, however, do feel free to contact any member of the team using the red feedback button or email <a href="mailto:hello@mentormatch.org.uk">hello@mentormatch.org.uk</a> at any time.</p>
+
+    <div class="small-12 columns faq-question-container" onclick="reveal('q1')">
+      <h4 class="faq-question">What is mentoring?</h4>
+    </div>
+    <div id="q1" class="answer">
+      <p>Mentoring is a relationship between two differently experienced individuals, where the mentor share their experience and knowledge with, and acts as a guide and support to, the mentee.</p>
+      <p>A mentor is someone you meet regularly who can help you develop professionally and personally. The mentoring relationship usually focuses on solving problems and identifying goals for the mentee to work on between sessions.  The aim is always to offer advice and support the development of the skills and confidence of the mentee.</p>
+      <p>There is collaboration and active participation by both parties – it works best where there is a good degree of openness and trust established between the mentor and mentee.</p>
+      <p>The discussions between a mentor and mentee are almost always confidential. There may be exceptional circumstances when the legal or professional responsibilities of the mentor could override their duty of confidentiality. The mentor should be able to highlight this in the first session.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q2')">
+      <h4 class="faq-question">What is coaching?</h4>
+    </div>
+    <div id="q2" class="answer">
+      <p>Mentoring and coaching are terms which are often used interchangeably however, Mentor Match believes there is a distinct difference.</p>
+      <p>Mentoring typically involves the passing on of knowledge, skill and experience by someone who has specific expertise. Coaching is more about helping individuals look at things differently or change their behaviour so that they can realise their full potential.</p>
+      <p>Coaching involves the use of active listening along with skilful questioning and feedback to help someone think through an issue, identify potential options and decide the best way forward for them. Coaches are usually certified.</p>
+      <p>Mentor Match does not offer matches for those looking for a coach. We believe this is a specific skillset which is different to mentoring. For those looking for a coach we would suggest contacting Civil Service Learning.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q3')">
+      <h4 class="faq-question">How is mentoring different to coaching?</h4>
+    </div>
+    <div id="q3" class="answer">
+      <p>Mentors use some of the same skills as a coach to help a person think through options and work out a way forward. However, the mentor is also able to bring his/her knowledge and experience of the work, workplace, or particular challenge to support the development of a more inexperienced member of staff.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q4')">
+      <h4 class="faq-question">Code of Good Practice for Mentors</h4>
+    </div>
+    <div id="q4" class="answer">
+      <p>Mentors are expected to take responsibility for developing and maintaining their own skills throughout their time as a mentor.</p>
+      <p>Mentors are expected to respect the confidentiality of the relationship, including after it has ended, and ensure that the mentee understands any limits to this confidentiality. If records of mentoring sessions are kept, Mentors are expected to store them securely and in accordance with civil service policies governing the handling of sensitive personal information.</p>
+      <p>Mentors are expected to be explicit about any conflict of interest or dual relationships with your mentee to immediate colleagues when they arrive.</p>
+      <p>Mentors are expected to be honest about themselves and their skills and to uphold the Civil Service Code.</p>
+      <p>Mentors are expected to recognise boundaries and to signpost mentees to more appropriate services where necessary e.g. counselling/HR advice/occupational health.</p>
+      <p>Mentors are expected to recognise their own limitations and to be explicit with mentees about their own level of competence and experience.</p>
+      <p>Mentors are required to act within the law at all times.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q5')">
+      <h4 class="faq-question">Code of Good Practice for Mentees</h4>
+    </div>
+    <div id="q5" class="answer">
+      <p>Mentees are expected to take responsibility for their own skill development and commit to completing any actions agreed during mentoring meetings.</p>
+      <p>Mentees are expected to be honest about themselves and their skills and to uphold the Civil Service Code.</p>
+      <p>Mentees are expected to respect the confidentiality of the relationship, including after it has ended, and sure that the mentor understands any limits to this confidentiality. If records of mentoring sessions are kept, the mentee must ensure that these are stored securely as per the civil service policies governing the handling of sensitive personal information.</p>
+      <p>Mentees are expected to inform line managers about their involvement in the scheme.</p>
+      <p>Mentees are required to act within the law at all times.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q6')">
+      <h4 class="faq-question">Is there a time limit to the mentor relationship?</h4>
+    </div>
+    <div id="q6" class="answer">
+      <p>Not necessarily. Mentors on the Mentor Match system can be approached for both short term or long term mentoring. It may be that you need someone to help you work through a one off challenge and that this is a very short term relationship. Equally, you may be looking for a long term solution. The length of the relationship depends on your needs and the time the mentor is able to make available for you. Mentoring is time intensive and mentees are always asked to respect the time commitment of the mentor.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q7')">
+      <h4 class="faq-question">Can I have more than one mentor?</h4>
+    </div>
+    <div id="q7" class="answer">
+      <p>Yes. We strongly recommend that you do! Mentor Match does limit the amount of emails you can send per week to 4. However, we recommend you reach out to a range of people who may be able to mentor you in different areas/ways.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q8')">
+      <h4 class="faq-question">What is expected of the mentee?</h4>
+    </div>
+    <div id="q8" class="answer">
+      <p>Any member of the civil service may use Mentor Match to find a mentor. To get the most of it you need to be prepared to be open and honest, to prioritise your mentoring sessions and to commit to the actions you agree with your mentor.</p>
+      <p>You should tell your line manager about your mentor to ensure that they support you to take time out from your working hours to attend meetings.</p>
+      <p>Mentoring is most effective when there is a clear purpose to the mentoring relationship. When reaching out to your mentor on the system, do ensure that you detail to them why you would like them to be your mentor. Remember that you are asking someone for a significant commitment of time. While they are often willing to provide this, it helps to detail what it is they can bring to the table in order for them to assess how they can be the most effective mentor.</p>
+      <p>Potentially areas for development:</p>
+      <ul>
+        <li>Get a better sense of career direction</li>
+        <li>Manage the transition from one role to another</li>
+        <li>Review strengths and weaknesses</li>
+        <li>Managing relationships</li>
+        <li>Managing people</li>
+        <li>Develop a strategic perspective</li>
+        <li>Help with competencies and interviews</li>
+      </ul>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q9')">
+      <h4 class="faq-question">What is expected of a mentor?</h4>
+    </div>
+    <div id="q9" class="answer">
+      <p>The focus for mentors is on helpful questioning and on supporting the mentee and deepening their understanding and learning about their behaviours and experiences. This is so that the mentee is better able to make decisions and take action. </p>
+      <p>Roles the mentor might play within a mentoring relationship:</p>
+      <ul>
+        <li>Sounding board for ideas</li>
+        <li>Challenger who will listen and ask probing questions</li>
+        <li>Translator of jargon who helps unravel and explain stretching information</li>
+        <li>Mirror reflecting back concerns and statements to help a mentee see themselves more clearly</li>
+        <li>Energiser to stimulate and drive action</li>
+        <li>Assessor providing objective feedback and judgement on activities</li>
+        <li>Adviser to expand future options and help clarify career direction</li>
+      </ul>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q10')">
+      <h4 class="faq-question">Why does the system offer me both mentors and mentees?</h4>
+    </div>
+    <div id="q10" class="answer">
+      <p>At Mentor Match we believe that everyone has something to offer to others regardless of your grade, department, or location. You must therefore fill out both sections of the profile to be matched with others.</p>
+      <p>This does not automatically mean people will start contacting you. If you are particularly looking for a mentor or mentee, then you may ignore the other matches. It remains the prerogative of any Mentor Match member to reply to any contact email they receive.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q11')">
+      <h4 class="faq-question">Can I use the Mentor Match if I’m not in the civil service?</h4>
+    </div>
+    <div id="q11" class="answer">
+      <p>No. Mentor Match is currently only for members of staff in the civil service. That includes all core departments, arms length bodies, non-departmental bodies, devolved administrations and associations.</p>
+      <p>If you are a member of the civil service and are unable to verify your email address or log in, please contact us through the feedback button or email <a href="mailto:hello@mentormatch.org.uk">hello@mentormatch.org.uk</a>.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q12')">
+      <h4 class="faq-question">How do I find a mentor/mentee?</h4>
+    </div>
+    <div id="q12" class="answer">
+      <p>Mentor Match suggests matches as both mentees and mentors. To see these matches you must have verified your civil service email address. Once verification is complete you should click the red ‘matches’ button on the top right of your profile.</p>
+      <p>You can filter matches based on professions and skills. This should allow you to identify appropriate matches per your requirements.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q13')">
+      <h4 class="faq-question">Can I search for a specific department?</h4>
+    </div>
+    <div id="q13" class="answer">
+      <p>No. We at Mentor Match have actively chosen to focus on matching people on their skills regardless of grade, location or department. Using the available filters for professions and skills, all members should be able to refine their suggested matches to those most useful to them as a mentor/mentee.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q14')">
+      <h4 class="faq-question">What happens if a mentor/mentee does not reply to my email?</h4>
+    </div>
+    <div id="q14" class="answer">
+      <p>It is always unfortunate is a mentor/mentee does not respond to your email. However, it remains the prerogative of all members to decided whether they respond to an email for another member of the system.</p>
+      <p>If your chosen mentor/mentee has not responded we suggest you search for an alternative option in the database. We also suggest that you tailor your email to your chosen mentor/mentee as much as possible to reflect your requirements. Descriptive and engaged emails have a higher response rate that those simply asking for a person’s time without explaining why.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q15')">
+      <h4 class="faq-question">Can people contact me?</h4>
+    </div>
+    <div id="q15" class="answer">
+      <p>Mentor Match members who have been matched to your skill profile are able to send an email to you through the system. We do not show your personal information to any prospective mentor/mentee. Only when you chose to respond to an email is your registered email address shared with the sender.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q16')">
+      <h4 class="faq-question">Where should I meet my mentor/mentee?</h4>
+    </div>
+    <div id="q16" class="answer">
+      <p>Mentor Match strongly recommends that you meet with any match in a public place or within a Government building.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q17')">
+      <h4 class="faq-question">What happens if I don’t like my mentor/mentee?</h4>
+    </div>
+    <div id="q17" class="answer">
+      <p>Mentoring is only successful if the two people involved are able to communicate and build a strong, positive, relationship. If you feel you are unable to this with a mentor/mentee then we suggest you politely end the relationship and seek another match on the system.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q18')">
+      <h4 class="faq-question">What happens if my mentor didn’t meet my requirements?</h4>
+    </div>
+    <div id="q18" class="answer">
+      <p>If you find that your mentor/mentee is unable to offer the skills/advice/commitment that you require, then we suggest you politely end the relationship and seek a new mentor on the system.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q19')">
+      <h4 class="faq-question">Does mentoring have to take place face-to-face?</h4>
+    </div>
+    <div id="q19" class="answer">
+      <p>No. Mentor Match is designed to bring people together based on skills, regardless of grade, department or location. If you are happy to conduct your mentoring relationship over the phone or Skype, then we believe you should be able to. Location should not be a limiting factor to mentoring.</p>
+    </div>
+    <div class="small-12 columns faq-question-container" onclick="reveal('q20')">
+      <h4 class="faq-question">What does a mentoring relationship look like?</h4>
+    </div>
+    <div id="q20" class="answer">
+      With the basic principles and values in mind a mentoring relationship is composed of the following elements:
+      <ul>
+        <li>The set up – the mentee and mentor agree to meet regularly and consistently, ideally once a month to every 6 weeks, for a maximum of two hours, to work together in a supportive yet challenging way.</li>
+        <li>The areas for focus – work-focused challenges/problems are worked on during these meetings.</li>
+        <li>The duration – usually between six to nine months, following by a review session to see if both parties have found the relationship beneficial.</li>
+        <li>The emphasis on learning – which emerges from working on a particular issue/problem.</li>
+      </ul>
+    </div>
+  </div>
+  {{/content}}
+{{/layout}}

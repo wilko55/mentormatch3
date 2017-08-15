@@ -1,0 +1,88 @@
+{{< layout}}
+  {{$content}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <div class="row" >
+    <div class="header-panel profile-panel bottom-margin">
+      <h1>Sign up</h1>
+    </div>
+    <div class="large-10 large-centered">
+      <div class="large-12">
+        {{#emailExistsError}}<span class="error-message">It looks like your email address is already registered. If you've previously used Mentor Match, please try <a href="/forgot-password">resetting your password?</a></p>
+          <p>If that doesn't work, or if you've not used this site before, please <a href="mailto:hello@mentormatch.org.uk">send us a message</a>.</span><br>{{/emailExistsError}}
+        {{^emailExistsError}}
+        <p>You've told us that your work email is <strong>{{workEmail}}</strong> - if that's not correct, please <a href="/">click here</a> to sign up again</p><br>
+          <div class="medium-5 columns" >
+            <form method="POST" action="/signup" id="sign-up-form">
+              <span class="show-old-ie show-ie9 hidden">Name:</span>
+              <label for="name"><strong>Name</strong></label>
+              {{#errors.validation.name}}<span class="error-message">{{errors.validation.name}}</span>{{/errors.validation.name}}
+              <input type="text" name="name" id="name" value="{{formData.name}}"/>
+
+              <span class="show-old-ie show-ie9 hidden">Password (must be longer than 8 characters):</span>
+              <label for="password">
+                <strong>Password</strong><br>
+                <ul>
+                  <li><span class="password-criteria">Between 8 and 32 characters</span><span id="passwordLength" class="password-icon"></span></li>
+                  <li><span class="password-criteria">Not use a common word/phrase</span><span id="commonPasswords" class="password-icon"></span></li>
+                  <li><span class="password-criteria">One upper case letter</span><span id="passwordUpper" class="password-icon"></span></li>
+                  <li></span><span class="password-criteria">One lower case letter</span><span id="passwordLower" class="password-icon"></li>
+                  <li></span><span class="password-criteria">One number</span><span id="passwordNumber" class="password-icon"></li>
+                  <li><span class="password-criteria">One special character</span><span id="passwordSpecial" class="password-icon"></span></li>
+                </ul>
+              </label>
+              {{#errors.validation.passwordValid}}<span class="error-message">{{errors.validation.passwordValid}}</span>{{/errors.validation.passwordValid}}
+              <input type="password" name="password" id="password"/>
+              <div style="text-align:center">
+                <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                <input class="button" type="submit" name="signin" id="signin" value="Sign up"/>
+              </div>
+            </form>
+          </div>
+          <div class="medium-2 columns">
+            <h4 style="color: black !important; text-align: center">or</h4>
+          </div>
+          <div class="medium-5 columns" style="color: black !important">
+            <div>
+              You can also use LinkedIn to authenticate yourself.</p>
+              When you log in, you'll be able to see the data we request access to.</p>
+              This includes basic details like your name and email address.</p>
+            </div>
+            <div style="text-align:center">
+              <a href="/auth/linkedin"><img src="/images/Sign-In-Small---Active.png"></a>
+            </div>
+          </div>
+        {{/emailExistsError}}
+      </div>
+    </div>
+  </div>
+  <script>
+    $('#password').keyup(function() {
+      var regexes = {
+        passwordLength: /^[\s\S]{8,32}$/,
+        passwordUpper: /[A-Z]/,
+        passwordLower: /[a-z]/,
+        passwordNumber: /[0-9]/,
+        passwordSpecial: /[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/,
+      };
+      var commonPasswords = /mentormatch|password|123456|querty|starwars|monkey|football|123456789|111111|qwertyuiop|google|1q2w3e4r5t|123qwe|BlackCoffeeWith10Sugars|zxcvbnm/ig;
+
+      var validPassword = true;
+      for (var regex in regexes) {
+        if (regexes.hasOwnProperty(regex)) {
+          var el = document.getElementById(regex)
+          if (document.getElementById('password').value.match(regexes[regex])) {
+            el.className = "fa fa-check password-icon";
+          } else {
+            el.className = "fa fa-times password-icon";
+          }
+        }
+      }
+      if (!document.getElementById('password').value.match(commonPasswords)) {
+        document.getElementById('commonPasswords').className = "fa fa-check password-icon";
+      } else {
+        document.getElementById('commonPasswords').className = "fa fa-times password-icon";
+      }
+    });
+  </script>
+  {{/content}}
+{{/layout}}

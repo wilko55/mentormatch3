@@ -1,0 +1,34 @@
+{{< layout}}
+  {{$content}}
+  <div class="row" >
+    <div class="header-panel profile-panel bottom-margin">
+      <h1>Sign up to Mentor Match</h1>
+    </div>
+    <div class="large-10 large-centered">
+      <div class="large-12">
+        <hr>
+        {{#errorMessage}}<div class="error-message">{{{errorMessage}}}</div><br>{{/errorMessage}}
+        {{#helpMessage}}<div class="help-message">{{helpMessage}}</div><br>{{/helpMessage}}
+        <div class="medium-6 columns" >
+          <form method="POST" action="/verify-email" id="sign-up-form">
+            {{^workEmailSent}}
+            <label for="workEmail">What's your Civil Service email address?</label>
+            <input tabindex="0" type="text" name="workEmail" id="workEmail" value="{{formData.name}}"/>
+            <div style="text-align:center">
+              <input type="hidden" name="_csrf" value="{{csrfToken}}">
+              <input role="button" tabindex="1"  class="button" type="submit" name="signin" id="signin" value="Sign up"/>
+            </div>
+            {{/workEmailSent}}
+          </form>
+        </div>
+        <div class="medium-6 columns" style="color: black !important">
+          <div>
+            Before you can use Mentor Match, we need you to verify that you're a Civil Servant.</p>
+            If your email isn't recognised, please drop us a message at <a href="mailto:hello@mentormatch.org.uk">hello@mentormatch.org.uk</a> and we'll look into it for you.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/content}}
+{{/layout}}

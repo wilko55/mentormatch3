@@ -1,0 +1,49 @@
+{{> includes-head}}
+{{> includes-admin-menu}}
+{{> includes-header}}
+
+    <body>
+        <div class="row">
+            <h1>Update skills</h1>
+            <hr>
+            <div class="large-12">
+                <div class="medium-6 small-12 columns">
+                    <form method="POST" action="/admin/skills">
+                        <label>
+                            <h5>Add skill to list</h5>
+                            Couple of things:<br>
+                            <ul>
+                                <li>it only allows alphabetic characters and spaces: 'web development', not 'some-skill 1'</li>
+                                <li>there's no delete skill function yet - lemme know if there's a typo and I'll remove manually unless/until it becomes an issue</li>
+                                <li>if you duplicate a skill then it'll break. Going to a different page might help this recover. Unsure but worth a gamble</li>
+                                <li>hasn't got as many tests as I'd like so let me know the second something unexpected happens and I'll roll the feature back</li>
+                            </ul>
+                            {{#error}}<span style="color:#971D1C">{{error}}<span>{{/error}}
+                            <input type="text" name="newSkill" placeholder="eg. User design, Web development">
+                        </label>
+                        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                        <button class="button" type="submit">Add skill</button>
+                    </form>
+                </div>
+                <div class="medium-6 small-12 columns">
+                    <h5>Current skills</h5>
+                    <table class="table large-12" style="color:black !important">
+                    <thead>
+                        <tr>
+                            <th width="300">Skill</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#skills}}
+                        <tr>
+                            <td>{{.}}</td>
+                        </tr>
+                        {{/skills}}
+                    </tbody>
+                </table>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </body>
+</html>

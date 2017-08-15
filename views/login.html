@@ -1,0 +1,44 @@
+{{< layout}}
+  {{$content}}
+  <div class="row">
+    <div class="header-panel profile-panel bottom-margin">
+      <h1>Login</h1>
+    </div>
+    <div class="large-10 columns large-centered">
+      <div class="large-12">
+        <div class="large-5 columns" >
+          <span class="error-message">{{errorMessage}}</span>
+          <form method="POST" action="/login" id="loginForm">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+            <label for="username">Email:</label>
+            <input type="text" name="username" id="username"
+                 placeholder="Email" value="{{formData.username}}"/>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password"
+                   placeholder="Password" />
+            <div class="centre">
+              <input role="button" class="button" type="submit" name="signin" id="signin" value="With username & password"/>
+              <br><a href="/forgot-password">Forgotten your password?</a>
+            </div>
+          </form>
+        </div>
+        <div class="large-2 columns">
+          <h2 class="centre"><br>or</h2>
+        </div>
+        <div class="large-5 columns">
+          <div>
+            You can also use LinkedIn to authenticate yourself.</p>
+            When you log in, you'll be able to see the data we request access to.</p>
+            This includes basic details like your name and email address.</p>
+          </div>
+          <div class="centre">
+            <a href="/auth/linkedin"><img src="/images/Sign-In-Small---Active.png" alt="Sign in with LinkedIn"></a>
+          </div>
+        </div>
+        <hr class="hr-padding">
+        <h4 class="centre">Not registered? <a href="/verify-email" title="signup">Sign up</a></h4>
+      </div>
+    </div>
+  </div>
+  {{/content}}
+{{/layout}}

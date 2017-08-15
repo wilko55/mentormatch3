@@ -1,0 +1,231 @@
+{{< layout}}
+  {{$content}}
+  <script src="/javascripts/typeahead.js" type="text/javascript"></script>
+  <body>
+    <div class="row">
+      <div class="header-panel profile-panel bottom-margin">
+        <h1>Complete your profile to register</h1>
+      </div>
+      <div class="large-9 small-12 large-centered columns" style="vertical-align: middle">
+        <div class="large-12 columns">
+        <form action="/register" method="post" id="register-new-user-form">
+          <div class="large-12">
+          {{errorMessage}}
+          <p class="error-message">{{errorMessage.areasOfInterest}}</p>
+            <input aria-hidden="true" type="hidden" name="id" value="{{id}}">
+            <input aria-hidden="true" type="hidden" name="linkedInId" value="{{liId}}">
+            <input aria-hidden="true" type="hidden" name="signedUp" value="0">
+            <label for="name">Name:</label>
+            <input type="text" id="name" label="name" name="name" value="{{data.displayName}}{{name}}">
+          </div>
+          <div class="row">
+            <div class="large-4 columns">
+              <label for="location">Where are you based?
+                <select id="location" name="location">
+                  <option value="London">London</option>
+                  <option value="East of England">East of England</option>
+                  <option value="Midlands">Midlands</option>
+                  <option value="North East">North East</option>
+                  <option value="North West">North West</option>
+                  <option value="South West">South West</option>
+                  <option value="South East">South East</option>
+                  <option value="Yorkshire and Humber">Yorkshire and the Humber</option>
+                  <option value="Northern Ireland">Northern Ireland</option>
+                  <option value="Scotland">Scotland</option>
+                  <option value="Wales">Wales</option>
+                  <option value="Overseas">Overseas</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="row" style="padding-top:10px">
+            <div class="large-3 small-6 columns">
+              <label for="grade">What's your grade?
+                <select id="grade" name="grade">
+                  <option value="0">AA</option>
+                  <option value="1">AO</option>
+                  <option value="2">EO</option>
+                  <option value="3">HEO</option>
+                  <option value="4">HEO(D)/Fast Streamer</option>
+                  <option value="5">SEO</option>
+                  <option value="6">G7</option>
+                  <option value="7">G6</option>
+                  <option value="8">SCS</option>
+                </select>
+              </label>
+            </div>
+            <div class="large-9 small-12 columns">
+              <label for="role">And your current role?</label>
+              <input type="text" id="role" name="currentRole" value="{{user._json.headline}}">
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-2 columns"></div>
+            <div class="large-6 large-centered columns"><hr></div>
+            <div class="large-2 columns"></div>
+          </div>
+
+          <div class="row">
+            <div class="large-12">
+              <div class="large-12 columns">
+                <p>Skills is a new feature - if some of your skills are missing please let us know using the feedback tab and you can add them later</p>
+              </div>
+              <div class="large-6 columns ">
+                <label>Profession
+                  <select name="profession" id="professionsList">
+                    <option value="" disabled></option>
+                    {{#professionArray}}
+                    <option value="{{.}}">{{.}}</option>
+                    {{/professionArray}}
+                    }
+                  </select>
+                </label>
+              </div>
+              <div class="large-12">
+                <div class="large-6 columns">
+                  <label for="typeahead-input">Your skills (type to select and click to remove):</label>
+                  <div id="the-basics">
+                    <input id="typeahead-input" class="typeahead" type="text" placeholder="Begin typing to add skill">
+                  </div>
+                  <div id="your-skills">
+
+                  </div><br>
+                  <input id="yourSkills" name="yourSkills" type="hidden" value="{{skillsListString}}">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+          <div class="large-2 columns"></div>
+          <div class="large-6 large-centered columns"><hr></div>
+          <div class="large-2 columns"></div>
+          <div class="large-12 columns">
+            <label for="goal">Is there a specific goal that you are looking to achieve? (300 characters)</label>
+              <textarea name="goal" id="goal" maxlength="300" style="height:70px">{{data.goal}}</textarea>
+          </div>
+          </div>
+          <div class="large-12">
+            <div class="row">
+              <div class="large-2 columns"></div>
+              <div class="large-6 large-centered columns"><hr></div>
+              <div class="large-2 columns"></div>
+            </div>
+            <h4>Rules of engagement</h4>
+            <p>Be polite, punctual and considerate. This is a professional relationship and both parties should approach it with the professionalism it deserves.</p>
+            <p>We suggest that mentors/ mentees start out by meeting for an hour or so a month and take things from there.</p>
+            <p>Don’t ask your mentor/ mentee/ coach for a job. If someone asks you for a job, we recommend subtly directing them to CSJ.</p>
+            <p>This website is for UK Civil Servants but it is not a government service. Do not post anything about your work that you would not be happy to discuss in public or post on LinkedIn.</p>
+            <p>If you misuse this system, you will be banned. By using this service you acknowledge to play fair and abide by these rules, and by clicking the button below you are agreeing to our <a href="/dpp" target="_blank" style="color: black !important; font-size: 16px">data protection policy</a>.
+            <div class="large-12" style="text-align: center">
+              <input type="hidden" name="_csrf" value="{{csrfToken}}">
+              <button id="send" class="button join-button round" type="submit" style="margin-top:10px">Get involved</button>
+              <h5>(You can log back in and edit your profile at any point)</h5>
+            </div>
+          </div>
+        </form>
+          </div>
+      </div>
+    </div>
+    <script>
+      var skillsString = "{{skills}}";
+      var skills = skillsString.split(',');
+      var yourSkillsArray = [];
+
+      $(document).ready(function () {
+
+        if ($('#yourSkills').val() !== ''){
+          var filterSkillsArray = $('#yourSkills').val().split(',');
+          for (var j = 0; j< filterSkillsArray.length; j++){
+            updateSkillsListDiv(filterSkillsArray[j]);
+            removeFromSkillsList(filterSkillsArray[j]);
+            yourSkillsArray.push(filterSkillsArray[j]);
+          }
+        }
+
+        $('#the-basics .typeahead').typeahead({
+          hint: false,
+          highlight: true,
+          minLength: 1
+        },
+        {
+          name: 'skills',
+          source: substringMatcher(skills)
+        });
+
+
+        $('#the-basics').bind('typeahead:selected', function (obj, datum, name) {
+          yourSkillsArray.push(datum);
+          updateSkillsListDiv(datum);
+          removeFromSkillsList(datum);
+          updateHiddenSkillsField(datum);
+          setTimeout(function (){$('.typeahead').typeahead('val', ''); }, 10);
+        });
+      });
+
+            var updateSkillsListDiv = function (skill){
+        var skillId = skill.replace(/ /g, '-')
+        $('#your-skills').append('<span class="skill-tag" id="skill-' + skillId + '" onclick="removeSkill(\'' +  skill + '\')">' + skill + '</span>')
+      }
+
+      var removeFromSkillsList = function (skill){
+        // remove from long skills list
+        for(var i = skills.length; i--;) {
+          if(skills[i] === skill) {
+              skills.splice(i, 1);
+          }
+        };
+      }
+
+      var updateHiddenSkillsField = function (skill){
+        $('#yourSkills').val( function ( index, val ) {
+          if (val == ''){
+            return skill;
+          }
+          else {
+            return val + ',' + skill;
+          }
+        });
+      }
+
+      var removeSkill = function (skill){
+        var skillId = skill.replace(/ /g, '-')
+        // add to skills list
+        skills.push(skill);
+        // remove html element
+        $('#skill-' + skillId).remove();
+        // remove from yourSkills array and update
+        for(var i = yourSkillsArray.length; i--;) {
+          if(yourSkillsArray[i] === skill) {
+              yourSkillsArray.splice(i, 1);
+          }
+        };
+
+        $('#yourSkills').val(yourSkillsArray.toString())
+        // replace yourSkills field value with
+      }
+
+      var substringMatcher = function (strs) {
+        return function findMatches(q, cb) {
+          var matches, substringRegex;
+
+          // an array that will be populated with substring matches
+          matches = [];
+
+          // regex used to determine if a string contains the substring `q`
+          substrRegex = new RegExp(q, 'i');
+
+          // iterate through the pool of strings and for any string that
+          // contains the substring `q`, add it to the `matches` array
+          $.each(strs, function (i, str) {
+            if (substrRegex.test(str)) {
+              matches.push(str);
+            }
+          });
+
+          cb(matches);
+        };
+      };
+
+    </script>
+    {{/content}}
+  {{/layout}}

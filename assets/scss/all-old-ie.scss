@@ -1,0 +1,45 @@
+$old-ie: true;
+$fix-mqs: 65em;
+
+.login-button {
+  position: absolute;
+}
+
+.old-ie-warning {
+  display:block !important;
+  background-color: #D03906;
+  padding: 10px 0 10px 0;
+  text-align: center;
+  color:white;
+}
+
+.show-old-ie {
+  font-size: 12px !important;
+  display: inline-block !important;
+}
+
+.hide-old-ie {
+  display: none !important;
+}
+
+.old-ie-footer {
+  color: white;
+  background-color: #D03906;
+  padding-top: 20px;
+  text-align: center;
+  left: 0;
+  bottom: 0;
+  height: 70px;
+  width: 100%;
+  float: left;
+}
+
+.old-ie-footer a {
+  color: white;
+}
+
+.ie-large-font {
+  font-size: 1em !important;
+}
+
+@import 'all';

@@ -1,0 +1,36 @@
+<div class="menu">
+  <nav class="simple-menu-horizontal hide-old-ie">
+    <ul class="menu-button" style="">
+      <li><a href="/verify-email">Sign up</a></li>
+      <li><a href="/login">Login</a></li>
+    </ul>
+  </nav>
+  <nav class="simple-mobile-menu hide-old-ie">
+    <i class="fa fa-bars fa-6" aria-hidden="true" onclick="mobileMenuSlider()"></i>
+  </nav>
+  <div class="show-old-ie menu-button hidden ie-large-font">
+      <a href="/verify-email">Sign up</a>
+      <a href="/login">Login</a> |
+  </div>
+</div>
+<div class="mobile-menu menu hide-old-ie hidden">
+  <div class="row">
+    <a href="/verify-email">
+      <div class="small-6 columns mobile-menu-buttom">
+        <i class="fa fa-envelope" aria-hidden="true"></i></br>
+        Sign up
+      </div>
+    </a>
+    <a href="/login">
+      <div class="small-6 columns mobile-menu-buttom">
+        <i class="fa fa-user" aria-hidden="true"></i></br>
+        Login
+      </div>
+    </a>
+  </div>
+</div>
+<script>
+  var mobileMenuSlider = function () {
+    $('.mobile-menu').toggle();
+  };
+</script>

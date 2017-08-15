@@ -1,0 +1,37 @@
+// Foundation's IE-friendly grid gets pasted in here...
+.lt-ie9 .large-4,
+.lt-ie9 .row .large-4 { width: 33.33333%; }
+// ... etc ...
+
+// Visibility fixers
+.ie-hide {
+  display: none !important;   // !important hack :(
+}
+
+.ie-show {
+  display: block !important;
+}
+
+.ie-show-ib {
+  display: inline-block !important;
+}
+
+.lt-ie9 {
+  header {
+    //Mobile visibility fixes...
+    &#mobile-header {
+      @extend .ie-hide;
+    }
+    &#desktop-header {
+      @extend .ie-show;
+    }
+  }
+  //Add grid column with specificity
+  .gallery-view section > div > ul > li {
+    @extend .large-4;
+  }
+}
+
+//@media screen and (min-width:0) {
+//  .ie8910{property:value;}
+//}

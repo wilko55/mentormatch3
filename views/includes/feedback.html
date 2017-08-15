@@ -1,0 +1,23 @@
+<div class="hide-old-ie">
+<a href="#" onclick="showFeedback();">
+    <div class="feedback-button">
+        Feedback
+    </div>
+</a>
+</div>
+<div class="row">
+    <div class="feedback-form small-10 large-4 medium-5">
+        <a class="close-feedback" href="#" onclick="showFeedback();"><button class="">X</button></a>
+        <form action="/feedback" method="post">
+            <label>Name<input class="feedback-field" type="text" name="name"></label>
+            <label>Email<input class="feedback-field" type="text" name="email"></label>
+            <label>Feedback<textarea class="text-area feedback-field" name="comment"></textarea></label>
+            <button class="button small" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+<script>
+    function showFeedback(){
+      $(".feedback-form").toggle();
+    }
+</script>

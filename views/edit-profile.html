@@ -1,0 +1,656 @@
+{{< layout}}
+  {{$content}}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <script src="/javascripts/typeahead.js" type="text/javascript"></script>
+  <script src="/javascripts/jquery.colorbox-min.js"></script>
+  <link rel="stylesheet" href="/stylesheets/colorbox.css" />
+    <style>
+      /*.content-container {
+        margin: 2em 0 0 2em;
+      }*/
+    </style>
+    <div class="row">
+      <div class="header-panel profile-panel">
+        <h1>Edit profile</h1>
+      </div>
+      <div class="large-12 small-12 large-centered columns">
+          <div id="form" class="content-container">
+            <form action="/updateProfile" method="post" id="update-profile-form">
+              <input type="hidden" name="_csrf" value="{{csrfToken}}">
+              <input type="hidden" name="id" value="{{data.id}}">
+              <input type="hidden" name="linkedInId" value="{{data.linkedInId}}">
+              <div class="edit-button">
+                <a href="/profile" class="button join-button hidden block" id="cancelButton">Cancel</a>
+                <input class="button hidden save-button" id="send" type="submit" value="Save">
+                <a role="button" class='inline warning-link' id="removeProfile" href="#remove-profile">Remove profile</a>
+              </div>
+              <div class="large-6 small-6">
+                <label for="name">Name:</label>
+                <input type="text" id="name" label="name" name="name" value="{{data.name}}">
+              </div>
+              <div class="row">
+                <div class="large-4 columns">
+                  <label for="location">Where are you based?
+                    <select id="location" name="location">
+                        <option value="London">London</option>
+                        <option value="East of England">East of England</option>
+                        <option value="Midlands">Midlands</option>
+                        <option value="North East">North East</option>
+                        <option value="North West">North West</option>
+                        <option value="South West">South West</option>
+                        <option value="South East">South East</option>
+                        <option value="Yorkshire and Humber">Yorkshire and the Humber</option>
+                        <option value="Northern Ireland">Northern Ireland</option>
+                        <option value="Scotland">Scotland</option>
+                        <option value="Wales">Wales</option>
+                        <option value="Overseas">Overseas</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="large-8 columns">
+                </div>
+              </div>
+              <div class="row">
+                <div class="large-3 small-6 columns">
+                  <label for="grade">What's your current grade?
+                    <select id="grade" name="grade">
+                      <option value="0">AA</option>
+                      <option value="1">AO</option>
+                      <option value="2">EO</option>
+                      <option value="3">HEO</option>
+                      <option value="4">HEO(D)/Fast Streamer</option>
+                      <option value="5">SEO</option>
+                      <option value="6">G7</option>
+                      <option value="7">G6</option>
+                      <option value="8">SCS</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="large-9 small-12 columns">
+                  <label for="role">And your current role? </label>
+                  <input id="role" type="text" name="currentRole" value="{{data.currentRole}}">
+                </div>
+                <div class="large-12 columns">
+                  <label for="about">Tell prospective mentors and mentees a little about yourself and your interests (1000 characters)
+                  <textarea id="about" class="text-area" name="aboutMe" maxlength="500">{{data.aboutMe}}</textarea>
+                  </label>
+                </div>
+                <div class="large-12 columns">
+                  <label for="goal">Is there a goal that you hope a mentor could help to achieve? (1000 characters)
+                    <textarea id="goal" class="text-area" name="goal" maxlength="500">{{data.goal}}</textarea>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="large-2 columns"></div>
+                <div class="large-6 large-centered columns"><hr></div>
+                <div class="large-2 columns"></div>
+              </div>
+              <div class="row">
+                <div class="large-12 medium-12 columns">
+                  <h2 class="section-title">Matching preferences</h2>
+                  <div class="large-4 medium-6 small-12 columns">
+                    <legend>You would like to be involved with</legend>
+                    <div class="small-12 medium-12 large-12 columns">
+                      <input id="relationship-coaching" type="checkbox" name="coaching" value="1"><label for="relationship-coaching">One-off advice sessions</label>
+                    </div>
+                    <div class="small-12 medium-12 large-12 columns">
+                      <input id="relationship-mentoring" type="checkbox" name="mentoring" value="1"><label for="relationship-mentoring">Longer term mentoring</label>
+                    </div>
+                  </div>
+                  <div class="large-4 medium-6 small-12 columns">
+                    <legend>Preferred contact type</legend>
+                    <div class="small-12 medium-12 large-12 columns">
+                      <input name="phone"  id="contact-phone" type="checkbox" value="1"><label for="contact-phone">Phone</label>
+                    </div>
+                    <div class="small-12 medium-12 large-12 columns">
+                      <input name="faceToFace" id="contact-faceToFace" type="checkbox" value="1"><label for="contact-faceToFace">Face to face</label>
+                    </div>
+                  </div>
+                  <div class="large-4 medium-6 small-12 columns end">
+                    <label for="matching-grade">What minimum grade would you like your mentor to be?
+                      <select id="matching-grade" name="minimumMentorGrade">
+                        <option value="-1">All</option>
+                        <option value="0">AA</option>
+                        <option value="1">AO</option>
+                        <option value="2">EO</option>
+                        <option value="3">HEO</option>
+                        <option value="4">HEO(D)/Fast Streamer</option>
+                        <option value="5">SEO</option>
+                        <option value="6">G7</option>
+                        <option value="7">G6</option>
+                        <option value="8">SCS</option>
+                      </select>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row"><br>
+                <div class="large-2 columns"></div>
+                <div class="large-6 large-centered columns"><hr></div>
+                <div class="large-2 columns"></div>
+              </div>
+              <div class="row">
+                <div class="large-12 medium-12 columns">
+                  <h2 class="section-title">Areas you're familiar with (optional)</h2>
+                  <legend>Do you have experience of any of the following, which you would be happy to discuss with a mentor or mentee?</legend>
+                  <div class="small-12 medium-6 large-4 columns">
+                    <input id="additional-bame" type="checkbox" name="bame" value="1"><label for="additional-bame">BAME issues</label>
+                  </div>
+                  <div class="small-12 medium-6 large-4 columns">
+                    <input id="additional-dependents" type="checkbox" name="dependents" value="1"><label for="additional-dependents">Caring for dependents</label>
+                  </div>
+                  <div class="small-12 medium-6 large-4 columns">
+                    <input id="additional-disability-issues" type="checkbox" name="disability" value="1"><label for="additional-disability-issues">Disability issues</label>
+                  </div>
+                  <div class="small-12 medium-6 large-4 columns">
+                    <input id="additional-LGBTQ" type="checkbox" name="lgbtq" value="1"><label for="additional-LGBTQ">LGBTQ issues</label>
+                  </div>
+                  <div class="small-12 medium-6 large-4 columns">
+                    <input id="additional-part-time" type="checkbox" name="partTime" value="1"><label for="additional-part-time">Part time working</label>
+                  </div>
+                  <div class="small-12 medium-6 large-4 columns">
+                    <input id="additional-gender-issues" type="checkbox" name="gender" value="1"><label for="additional-gender-issues">Gender issues</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row"><br>
+                <div class="large-2 columns"></div>
+                <div class="large-6 large-centered columns"><hr></div>
+                <div class="large-2 columns"></div>
+              </div>
+              <div class="large-12">
+                <h2 class="section-title">Profession and skills</h2>
+                <p>Are we missing your profession or skills? Use the feedback tab above to let us know</p>
+                <div class="large-6 columns ">
+                  <label for="professionsList">Profession
+                    <select name="profession" id="professionsList">
+                      <option value="" disabled></option>
+                      {{#professionArray}}
+                      <option value="{{.}}">{{.}}</option>
+                      {{/professionArray}}
+                      }
+                    </select>
+                  </label>
+                </div>
+                <div class="large-12">
+                  <div class="large-6 columns">
+                    <label for="typeahead-input">Your skills (start typing to select your skills or click on them to remove):</label>
+                    <div id="the-basics">
+                      <input id="typeahead-input" class="typeahead" type="text" placeholder="Begin typing to add skill">
+                    </div>
+                    <div id="your-skills">
+
+                    </div><br>
+                    <input id="yourSkills" name="yourSkills" type="hidden" value="{{skillsListString}}">
+                  </div>
+                </div>
+              </div>
+              <div class="row"><br>
+                <div class="large-2 columns"></div>
+                <div class="large-6 large-centered columns"><hr></div>
+                <div class="large-2 columns"></div>
+              </div>
+              <div class="row">
+                <a name="areas-to-develop"></a>
+                <div class="large-12 medium-12 columns">
+                  <h2 class="section-title">Areas you would like to develop</h2>
+                  <p>Please pick at least one and give some details about your goals and any current experience. This helps us match you to prospective mentors.</p>
+                  <div id="to-develop-container">
+                    <!-- Areas to develop are inserted here -->
+                  </div>
+                  <div class="large-6 medium-6 small-12 column end centre">
+                    <button type="button" class="button" id="add-develop-box" onclick="addAreaBox('develop')">Add another area to develop</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="large-2 columns"></div>
+                <div class="large-6 large-centered columns"><hr></div>
+                <div class="large-2 columns"></div>
+              </div>
+              <div class="row">
+                <a name="areas-to-offer"></a>
+                <div class="large-12 medium-12 columns">
+                  <h2 class="section-title">Experience you can offer</h2>
+                  <p>Again, please choose at least one and give details.</p>
+                  <div id="to-offer-container">
+                    <!-- Areas to offer are inserted here -->
+                  </div>
+                  <div class="large-6 medium-6 small-12 column end centre">
+                    <button type="button" class="button" id="add-offer-box" onclick="addAreaBox('offer')">Add another area to offer</button>
+                  </div>
+
+                </div>
+                <div class="edit-button">
+                  <a href="/profile" class="button join-button hidden block" id="cancelButton2">Cancel</a>
+                  <input class="button hidden save-button" id="send2" type="submit" value="Save">
+                </div>
+              </div>
+            </form>
+          </div>
+    <div class="hidden">
+      <div id="remove-profile" class="remove-modal">
+      Clicking this button will immediately and permanently remove your data from the Mentor Match server.</p>
+      <a href="/remove/" id="confirmRemove"><span class="button alert">Remove profile</span></a>
+      <a href='#' class="button" onclick='parent.$.colorbox.close(); return false;'>Cancel</a>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var skillsString = "{{skills}}";
+      var skills = skillsString.split(',');
+
+      var categories = ['Programme and project management', 'Policy development', 'Change management', 'Commercial awareness', 'Communications', 'People management', 'Financial management'];
+      var toDevelop = categories;
+      var toOffer = categories;
+
+      var yourSkillsArray = [];
+
+      $(document).ready(function() {
+        if ('{{data.grade}}' == 'Faststream'){
+          $("select[name='grade']").val('Faststreamer');
+        }
+        else {
+          $("select[name='grade']").val('{{data.grade}}');
+        }
+
+        if ('{{data.minimumMentorGrade}}' == 'Faststream'){
+          $("select[name='minimumMentorGrade']").val('Faststreamer');
+        }
+        else {
+          $("select[name='minimumMentorGrade']").val('{{data.minimumMentorGrade}}');
+        }
+
+        $("select[name='location']").val('{{data.location}}');
+
+        var checkboxObject = {
+          'mentoring': '{{data.mentoring}}',
+          'coaching': '{{data.coaching}}',
+          'faceToFace': '{{data.faceToFace}}',
+          'phone': '{{data.phone}}',
+          'gender': '{{data.gender}}',
+          'bame': '{{data.bame}}',
+          'lgbtq': '{{data.lgbtq}}',
+          'partTime': '{{data.partTime}}',
+          'disability': '{{data.disability}}',
+          'dependents': '{{data.dependents}}',
+        };
+
+        $.each(checkboxObject, function(key, value){
+          if (value == 1) {
+            $("input[name='" + key + "']").prop('checked', true);
+          }
+          else {
+            $("input[name='" + key + "']").prop('checked', false);
+          }
+        });
+
+        $("select[name='profession']").val('{{data.profession}}');
+
+
+        $(".inline").colorbox({inline:true, width:"50%"});
+
+        if ($('#yourSkills').val() !== ''){
+          var filterSkillsArray = $('#yourSkills').val().split(',');
+          for (var j = 0; j< filterSkillsArray.length; j++){
+            updateSkillsListDiv(filterSkillsArray[j]);
+            removeFromSkillsList(filterSkillsArray[j]);
+            yourSkillsArray.push(filterSkillsArray[j]);
+          }
+        }
+
+        $('#the-basics .typeahead').typeahead({
+          hint: false,
+          highlight: true,
+          minLength: 1
+        },
+        {
+          name: 'skills',
+          source: substringMatcher(skills)
+        });
+
+
+        $('#the-basics').bind('typeahead:selected', function(obj, datum, name) {
+          yourSkillsArray.push(datum);
+          updateSkillsListDiv(datum);
+          removeFromSkillsList(datum);
+          updateHiddenSkillsField(datum);
+          setTimeout(function(){$('.typeahead').typeahead('val', ''); }, 10);
+        });
+
+        {{#data.toDevelop1}}
+          updateAreaBoxOnLoad(1, 'toDevelop', 'toDevelop1', '{{data.toDevelop1}}', '{{data.toDevelop1About}}')
+        {{/data.toDevelop1}}
+        {{#data.toDevelop2}}
+          updateAreaBoxOnLoad(2, 'toDevelop', 'toDevelop2', '{{data.toDevelop2}}', '{{data.toDevelop2About}}')
+        {{/data.toDevelop2}}
+        {{#data.toDevelop3}}
+          updateAreaBoxOnLoad(3, 'toDevelop', 'toDevelop3', '{{data.toDevelop3}}', '{{data.toDevelop3About}}')
+        {{/data.toDevelop3}}
+        {{#data.toDevelop4}}
+          updateAreaBoxOnLoad(4, 'toDevelop', 'toDevelop4', '{{data.toDevelop4}}', '{{data.toDevelop4About}}')
+        {{/data.toDevelop4}}
+        {{#data.toDevelop5}}
+          updateAreaBoxOnLoad(5, 'toDevelop', 'toDevelop5', '{{data.toDevelop5}}', '{{data.toDevelop5About}}')
+        {{/data.toDevelop5}}
+        {{#data.toDevelop6}}
+          updateAreaBoxOnLoad(6, 'toDevelop', 'toDevelop6', '{{data.toDevelop6}}', '{{data.toDevelop6About}}')
+        {{/data.toDevelop6}}
+
+        {{#data.toOffer1}}
+          updateAreaBoxOnLoad(1, 'toOffer', 'toOffer1', '{{data.toOffer1}}', '{{data.toOffer1About}}', '{{data.toOffer1Level}}')
+        {{/data.toOffer1}}
+        {{#data.toOffer2}}
+          updateAreaBoxOnLoad(2, 'toOffer', 'toOffer2', '{{data.toOffer2}}', '{{data.toOffer2About}}', '{{data.toOffer2Level}}')
+        {{/data.toOffer2}}
+        {{#data.toOffer3}}
+          updateAreaBoxOnLoad(3, 'toOffer', 'toOffer3', '{{data.toOffer3}}', '{{data.toOffer3About}}', '{{data.toOffer3Level}}')
+        {{/data.toOffer3}}
+        {{#data.toOffer4}}
+          updateAreaBoxOnLoad(4, 'toOffer', 'toOffer4', '{{data.toOffer4}}', '{{data.toOffer4About}}', '{{data.toOffer4Level}}')
+        {{/data.toOffer4}}
+        {{#data.toOffer5}}
+          updateAreaBoxOnLoad(5, 'toOffer', 'toOffer5', '{{data.toOffer5}}', '{{data.toOffer5About}}', '{{data.toOffer5Level}}')
+        {{/data.toOffer5}}
+        {{#data.toOffer6}}
+          updateAreaBoxOnLoad(6, 'toOffer', 'toOffer6', '{{data.toOffer6}}', '{{data.toOffer6About}}', '{{data.toOffer6Level}}')
+        {{/data.toOffer6}}
+
+        var developCountOnLoad = $(".develop-box").length;
+        var offerCountOnLoad = $(".offer-box").length;
+        // count and remove add buttons
+        if (developCountOnLoad >= 6){
+          // hide add develop area button
+          $("#add-develop-box").hide();
+        }
+        if (offerCountOnLoad >= 6){
+          // hide add develop area button
+          $("#add-offer-box").hide();
+        }
+
+      });
+
+      var updateAreaBoxOnLoad = function(boxNum, type, id, areaName, areaAbout, areaLevel) {
+        if (type === 'toDevelop') {
+          $("#to-develop-container").append('<div id="toDevelop' + boxNum + '">\
+            <div class="large-6 medium-6 small-12 columns end" >\
+              <div class="develop-box">\
+                <button role="button" class="remove-area-box" onclick="removeArea(\'' + id + '\')">Remove</button>\
+                <div class="large-12" class="no-left-padding">\
+                  <label for="to-develop-dropdown-' + id + '">Select area</label>\
+                  <select class="to-develop-options" id="to-develop-dropdown-' + id + '" name="' + id + '">\
+                    <option default disabled selected="selected">Select an area</option>\
+                    <option>Programme and project management</option>\
+                    <option>Policy development</option>\
+                    <option>Change management</option>\
+                    <option>Commercial awareness</option>\
+                    <option>Communications</option>\
+                    <option>People management</option>\
+                    <option>Financial management</option>\
+                  </select>\
+                </div>\
+                <div class="large-12">\
+                  <label for="' + id + 'About">Describe any previous experience you have</label>\
+                    <textarea class="category-text-area" id="' + id + 'About" maxlength="500" name="' + id + 'About">' + areaAbout + '</textarea>\
+                </div>\
+              </div>\
+            </div>\
+          </div>')
+
+          $("select[name='" + id + "']").val(areaName);
+        }
+        else {
+          // todo for toOffer
+          $("#to-offer-container").append(
+          '<div id="toOffer' + boxNum + '">\
+            <div class="large-6 medium-6 small-12 columns end" >\
+              <div class="offer-box">\
+                <button class="remove-area-box" onclick="removeArea(\'' + id + '\')">Remove</button>\
+                <div class="large-12" class="no-left-padding">\
+                  <label for="to-offer-dropdown-' + id +'">Select an area</label>\
+                  <select class="to-offer-options" id="to-offer-dropdown-' + id +'" name="' + id + '">\
+                    <option default disabled selected="selected"></option>\
+                    <option>Programme and project management</option>\
+                    <option>Policy development</option>\
+                    <option>Change management</option>\
+                    <option>Commercial awareness</option>\
+                    <option>Communications</option>\
+                    <option>People management</option>\
+                    <option>Financial management</option>\
+                  </select>\
+                </div>\
+                <div class="large-12" class="no-left-padding">\
+                  <label for="to-offer-dropdown-' + id + 'Level">Select your level:</label>\
+                  <select class="to-offer-level" id="to-offer-dropdown-' + id + 'Level" name="' + id + 'Level">\
+                    <option value="" disabled="" selected=""></option>\
+                    <option value="1" id="Cm-1">I have experienced this as part of a team</option>\
+                    <option value="2" id="Cm-2">I have done this on my own</option>\
+                    <option value="3" id="Cm-3">I have a led a small team doing this</option>\
+                    <option value="4" id="Cm-4">I have led a large team doing this</option>\
+                    <option value="5" id="Cm-5">I have led a department doing this</option>\
+                  </select>\
+                </div>\
+                <div class="large-12">\
+                  <label for="' + id + 'About">Describe any previous experience you have</label>\
+                    <textarea id="' + id + 'About" class="category-text-area" maxlength="500" name="' + id + 'About">' + areaAbout + '</textarea>\
+                </div>\
+              </div>\
+            </div>\
+          </div>')
+
+          $("select[name='" + id + "']").val(areaName);
+          $("#to-offer-dropdown-" + id + "Level").val(areaLevel);
+        }
+
+      }
+
+      var updateSkillsListDiv = function(skill){
+        var skillId = skill.replace(/ /g, '-');
+        $('#your-skills').append('<span class="skill-tag" id="skill-' + skillId + '" onclick="removeSkill(\'' +  skill + '\')">' + skill + '</span>');
+      };
+
+      var removeFromSkillsList = function(skill){
+        // remove from long skills list
+        for(var i = skills.length; i--;) {
+          if(skills[i] === skill) {
+              skills.splice(i, 1);
+          }
+        }
+      };
+
+      var updateHiddenSkillsField = function(skill){
+        $('#yourSkills').val( function( index, val ) {
+          if (val == '') {
+            return skill;
+          }
+          else {
+            return val + ',' + skill;
+          }
+        });
+      };
+
+      var removeSkill = function(skill){
+        var skillId = skill.replace(/ /g, '-');
+        // add to skills list
+        skills.push(skill);
+        // remove html element
+        $('#skill-' + skillId).remove();
+        // remove from yourSkills array and update
+        for(var i = yourSkillsArray.length; i--;) {
+          if(yourSkillsArray[i] === skill) {
+              yourSkillsArray.splice(i, 1);
+          }
+        }
+
+        $('#yourSkills').val(yourSkillsArray.toString());
+        // replace yourSkills field value with
+      };
+
+      var substringMatcher = function(strs) {
+        return function findMatches(q, cb) {
+          var matches, substringRegex;
+
+          // an array that will be populated with substring matches
+          matches = [];
+
+          // regex used to determine if a string contains the substring `q`
+          substrRegex = new RegExp(q, 'i');
+
+          // iterate through the pool of strings and for any string that
+          // contains the substring `q`, add it to the `matches` array
+          $.each(strs, function(i, str) {
+            if (substrRegex.test(str)) {
+              matches.push(str);
+            }
+          });
+
+          cb(matches);
+        };
+      };
+
+      var addAreaBox = function(developOrOffer) {
+        var developCount = $(".develop-box").length;
+        var offerCount = $(".offer-box").length;
+
+        var developBoxesArray = ['toDevelop1', 'toDevelop2', 'toDevelop3', 'toDevelop4', 'toDevelop5', 'toDevelop6'];
+        var offerBoxesArray = ['toOffer1', 'toOffer2', 'toOffer3', 'toOffer4', 'toOffer5', 'toOffer6'];
+
+        if (developOrOffer === 'develop' && developCount <= 6) {
+
+          // get element to add new box after
+
+          // adds correct missing box in sequence
+          var boxIdToAdd = '';
+          var boxNumToAdd = 0;
+          $(developBoxesArray).each(function(i, e){
+            if ($("#"+e).length === 0){
+              boxIdToAdd = e;
+              boxNumToAdd = i+1
+              return false;
+            }
+            // if one not found, break out of loop and set boxIdToAdd = that value
+          });
+          $("#to-develop-container").append('<div id="toDevelop' + boxNumToAdd + '">\
+            <div id="' + boxIdToAdd + '"  class="large-6 medium-6 small-12 columns end" >\
+              <div class="develop-box">\
+                  <button class="remove-area-box" onclick="removeArea(\'' + boxIdToAdd + '\')">Remove</button>\
+                  <div class="large-12" class="no-left-padding">\
+                    <label for="to-develop-dropdown-' + boxIdToAdd + '">Select an area</lable>\
+                    <select class="to-develop-options" id="to-develop-dropdown-' + boxIdToAdd + '" name="' + boxIdToAdd + '">\
+                      <option default disabled selected="selected"></option>\
+                      <option>Programme and project management</option>\
+                      <option>Policy development</option>\
+                      <option>Change management</option>\
+                      <option>Commercial awareness</option>\
+                      <option>Communications</option>\
+                      <option>People management</option>\
+                      <option>Financial management</option>\
+                    </select>\
+                  </div>\
+                <div class="large-12">\
+                  <label for="' + boxIdToAdd + 'About">Describe any previous experience you have</label>\
+                    <textarea class="category-text-area" id="' + boxIdToAdd + 'About" maxlength="500" name="' + boxIdToAdd + 'About"></textarea>\
+                </div>\
+              </div>  \
+            </div>\
+          </div>')
+
+
+          if (developCount === 5){
+            // hide add develop area button
+            $("#add-develop-box").hide();
+          }
+
+          // reset dropdown values
+          $(developBoxesArray).each(function(i, e){
+            if (document.getElementById(e) === null){
+              boxIdToAdd = e;
+              return false;
+            }
+          });
+        }
+        else if(developOrOffer === 'offer' && offerCount <= 6) {
+
+          var boxIdToAdd = '';
+          var boxNumToAdd = 0;
+          $(offerBoxesArray).each(function(i, e){
+            if ($("#"+e).length === 0){
+              boxIdToAdd = e;
+              boxNumToAdd = i+1
+              return false;
+            }
+          });
+
+          $("#to-offer-container").append(
+          '<div id="toOffer' + boxNumToAdd + '">\
+            <div class="large-6 medium-6 small-12 columns end" >\
+              <div class="offer-box">\
+                <button class="remove-area-box" onclick="removeArea(\'' + boxIdToAdd + '\')">Remove</button>\
+                <div class="large-12" class="no-left-padding">\
+                  <label for="to-offer-dropdown-' + boxIdToAdd + '">Select an area</label>\
+                  <select class="to-offer-options" id="to-offer-dropdown-' + boxIdToAdd + '" name="' + boxIdToAdd + '">\
+                    <option default disabled selected="selected"></option>\
+                    <option>Programme and project management</option>\
+                    <option>Policy development</option>\
+                    <option>Change management</option>\
+                    <option>Commercial awareness</option>\
+                    <option>Communications</option>\
+                    <option>People management</option>\
+                    <option>Financial management</option>\
+                  </select>\
+                </div>\
+                <div class="large-12" class="no-left-padding">\
+                  <label for="to-offer-dropdown-' + boxIdToAdd + 'Level">Select your level</label>\
+                  <select class="to-offer-level" id="to-offer-dropdown-' + boxIdToAdd + 'Level" name="' + boxIdToAdd + 'Level">\
+                    <option value="" disabled="" selected=""></option>\
+                    <option value="1" id="Cm-1">I have experienced this as part of a team</option>\
+                    <option value="2" id="Cm-2">I have done this on my own</option>\
+                    <option value="3" id="Cm-3">I have a led a small team doing this</option>\
+                    <option value="4" id="Cm-4">I have led a large team doing this</option>\
+                    <option value="5" id="Cm-5">I have led a department doing this</option>\
+                  </select>\
+                </div>\
+                <div class="large-12">\
+                  <label for="' + boxIdToAdd + 'About">Describe any previous experience you have</label>\
+                    <textarea id="' + boxIdToAdd + 'About" class="category-text-area" maxlength="500" name="' + boxIdToAdd + 'About"></textarea>\
+                </div>\
+              </div>\
+            </div>\
+          </div>')
+
+          if (offerCount === 5){
+            // hide add develop area button
+            $("#add-offer-box").hide();
+          }
+
+          // reset dropdown values
+          $(offerBoxesArray).each(function(i, e){
+            if (document.getElementById(e) === null){
+              boxIdToAdd = e;
+              return false;
+            }
+          });
+        }
+      };
+
+      var removeArea = function (developOrOfferId, container) {
+        var developCount = $(".develop-box").length;
+        var offerCount = $(".offer-box").length;
+
+
+        var element = document.getElementById(developOrOfferId);
+        $(element).remove();
+        if (developCount <= 6){
+          $("#add-develop-box").show();
+        }
+        if (offerCount <= 6){
+          $("#add-offer-box").show();
+        }
+      };
+
+
+    </script>
+    {{/content}}
+  {{/layout}}

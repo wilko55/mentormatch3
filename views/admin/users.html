@@ -1,0 +1,67 @@
+{{> includes-head}}
+{{> includes-admin-menu}}
+{{> includes-header}}
+<body>
+    <div class="row">
+        <h1>User management</h1>
+        {{#error}}<p class="error-message">{{error}}</p>{{/error}}
+        <hr>
+    </div>
+    <div class="row">
+        <h2>Admins</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Level</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#admins}}
+            <tr>
+              <td>{{id}}</td>
+              <td>{{name}}</td>
+              <td>{{email}}</td>
+              <td>{{adminLevel}}</td>
+            </tr>
+            {{/admins}}
+          </tbody>
+        </table>
+        <hr>
+    </div>
+    <div class="row">
+      <h3>Add an admin</h3>
+      <form method="POST" action="/admin/add-admin">
+        <div class="large-6">
+          <label for="email">Email (Civil Service, personal or other)</label>
+          <input style="width: 400px; font-size: 16px; padding: 5px" id="email" name="email">
+        </div>
+        <div class="large-6">
+          <label for="access-level">Set access level</label>
+          <select id="access-level" name="accessLevel">
+            <option value="4">Volunteer - MI and graphs</option>
+            <option value="3">Enhanced volunteer - update skills</option>
+            <option value="2">Trustee - everything excl admin management</option>
+            <option value="1">Site admin - everything inc admin management</option>
+          </select>
+        </div>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <input type="submit" value="Add admin">
+      </form>
+    </div>
+    <hr>
+    <div class="row">
+      <h3>Remove an admin</h3>
+      <form method="POST" action="/admin/remove-admin">
+        <label for="remove-id">Id to remove</label>
+        <input style="width: 400px; font-size: 16px; padding: 5px" id="remove-id" name="remove-id">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <input type="submit" value="Remove admin">
+      </form>
+    </div>
+
+</body>
+</html>

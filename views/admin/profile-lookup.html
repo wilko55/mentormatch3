@@ -1,0 +1,64 @@
+{{> includes-head}}
+{{> includes-admin-menu}}
+{{> includes-header}}
+
+    <body>
+        <div class="row">
+            <h1>Profile lookup</h1>
+            <hr>
+            {{#ok}}<span>Updated ok</span>{{/ok}}
+            {{#problem}}<span>Problem with update!! Nothing changed.</span>{{/problem}}
+            {{#errorMessage}}<span class="error-message">{{errorMessage}}</span>{{/errorMessage}}
+            <div class="large-12">
+                <div class="medium-12">
+                    {{^userData}}
+                    <form method="POST" action="/admin/tools/profile-lookup">
+                        <label>
+                            <h5>Enter associated email to check profile</h5>
+                            <input type="text" name="userEmail" placeholder="Can be login, LI or work email">
+                        </label>
+                        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                        <button class="button" type="submit">Lookup profile</button>
+                    </form>
+                    {{/userData}}
+                    {{#userData.0}}
+                    <form method="POST" action="/admin/tools/update-user-details" style="border: solid red 3px; padding: 10px">
+                        <label>
+                            <h5 style="color: red">Reset {{userData.1.value}}'s login email or password</h5>
+                            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                            <input type="hidden" name="id" value="{{userData.0.value}}">
+                            <label>Login email<input type="text" name="email" placeholder="New login email address"></label>
+                            <label>Civil service email<input type="text" name="csEmail" placeholder="New CS email address"></label>
+                            <label>Update password (uppercase, lowercase, number, special character, < 8 characters)
+                            <input type="text" name="password" placeholder="New password"></label>
+                        </label>
+                        <button class="button" type="submit">Update profile</button>
+                    </form>
+                    {{/userData.0}}
+                </div>
+                <div class="medium-12">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th style="width: 30%">Field</th>
+                        <th>Data</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{#userData}}
+                      <tr>
+                        <td>{{field}}</td>
+                        <td>{{value}}</td>
+                      </tr>
+                      {{/userData}}
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+            <hr>
+            <div class="large-12">
+
+            </div>
+        </div>
+    </body>
+</html>

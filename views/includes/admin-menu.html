@@ -1,0 +1,89 @@
+<div class="menu">
+  <nav class="simple-menu-horizontal hide-old-ie">
+    <ul class="menu-button">
+      <li><a href="/admin/graphs">Graphs</a></li>
+      <li><a href="/admin/mi">MI report</a></li>
+      {{#user.adminLevel2}}
+      <li><a href="/admin/skills">Skills</a></li>
+      <li><a href="/admin/admin-tools">Admin tools</a></li>
+      {{/user.adminLevel2}}
+      {{#user.adminLevel1}}
+      <li><a href="/admin/skills">Skills</a></li>
+      <li><a href="/admin/admin-tools">Admin tools</a></li>
+      <li><a href="/admin/users">Admin users</a></li>
+      {{/user.adminLevel1}}
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </nav>
+  <nav class="simple-mobile-menu hide-old-ie">
+    <i class="fa fa-bars fa-6" aria-hidden="true" onclick="mobileMenuSlider()"></i>
+  </nav>
+</div>
+<div class="mobile-menu menu hidden hide-old-ie">
+  <div class="row">
+  <a href="/admin/graphs">
+      <div class="small-2 columns mobile-menu-buttom">
+        <i class="fa fa-line-chart" aria-hidden="true"></i></br>
+        Graphs
+      </div>
+    </a>
+    <a href="/admin/mi">
+      <div class="small-2 columns mobile-menu-buttom">
+        <i class="fa fa-file-text" aria-hidden="true"></i></br>
+        MI
+      </div>
+    </a>
+    {{#user.adminLevel2}}
+    <a href="/admin/skills">
+      <div class="small-2 columns mobile-menu-buttom">
+        <i class="fa fa-graduation-cap" aria-hidden="true"></i></br>
+        Skills
+      </div>
+    </a>
+    <a href="/admin/admin-tools">
+      <div class="small-2 columns mobile-menu-buttom">
+        <i class="fa fa-wrench" aria-hidden="true"></i></br>
+        Tools
+      </div>
+    </a>
+    {{/user.adminLevel2}}
+    {{#user.adminLevel1}}
+    <a href="/admin/skills">
+      <div class="small-2 columns mobile-menu-buttom">
+        <i class="fa fa-graduation-cap" aria-hidden="true"></i></br>
+        Skills
+      </div>
+    </a>
+    <a href="/admin/admin-tools">
+      <div class="small-2 columns mobile-menu-buttom">
+        <i class="fa fa-wrench" aria-hidden="true"></i></br>
+        Tools
+      </div>
+    </a>
+    <a href="/admin/users">
+      <div class="small-2 columns mobile-menu-buttom">
+        <i class="fa fa-wrench" aria-hidden="true"></i></br>
+        Admins
+      </div>
+    </a>
+    {{/user.adminLevel1}}
+    <a href="/profile">
+      <div class="small-2 columns mobile-menu-buttom">
+        <i class="fa fa-user" aria-hidden="true"></i><br>
+        Profile
+      </div>
+    </a>
+    <a href="/logout">
+      <div class="small-2 columns mobile-menu-buttom">
+        <i class="fa fa-sign-out" aria-hidden="true"></i><br>
+        Logout
+      </div>
+    </a>
+  </div>
+</div>
+<script>
+  var mobileMenuSlider = function () {
+    $('.mobile-menu').toggle();
+  }
+</script>

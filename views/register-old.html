@@ -1,0 +1,374 @@
+  {{> includes-head}}
+  <body>
+    <div class="header hide-for-small-only"><a href="/"><h1 class="title">{{title}}</h1></a></div>
+    <div class="header-mobile show-for-small-only"><a href="/"><h1 class="title">{{title}}</h1></a></div>
+    <div class="row">
+      <div class="large-9 small-12 large-centered columns" style="vertical-align: middle">
+        <h2>Complete your {{title}} profile to register</h2>
+        <div class="large-12 columns profile-info-box">
+        <form action="/updateProfile" method="post">
+          <div class="large-12">
+            <input type="hidden" name="id" value="{{id}}">
+            <input type="hidden" name="linkedInId" value="{{liId}}">
+            <label>Name:</label>
+            <input type="text" label="name" name="name" value="{{data.displayName}}{{name}}">
+          </div>
+          <div class="row">
+          <div class="large-8 columns">
+            <label>Email</label>
+            <input type="email" label="email" name="email" value="{{data._json.emailAddress}}{{email}}">
+          </div>
+          <div class="large-4 columns">
+            <label>Where are you based?
+              <select name="location">
+                <option value="London">London</option>
+                <option value="North West">North West</option>
+                <option value="North East">North East</option>
+                <option value="Midlands">Midlands</option>
+                <option value="South West">South West</option>
+                <option value="South East">South East</option>
+                <option value="Wales">Wales</option>
+                <option value="Scotland">Scotland</option>
+              </select>
+            </label>
+          </div>
+          </div>
+          <div class="row" style="padding-top:10px">
+            <div class="large-3 small-6 columns">
+              <label>What's your current grade?
+                <select name="grade">
+                  <option value="0">AA</option>
+                  <option value="1">AO</option>
+                  <option value="2">EO</option>
+                  <option value="3">HEO</option>
+                  <option value="4">HEO(D)/Fast Streamer</option>
+                  <option value="5">SEO</option>
+                  <option value="6">G7</option>
+                  <option value="7">G6</option>
+                  <option value="8">SCS</option>
+                </select>
+              </label>
+            </div>
+            <div class="large-9 small-12 columns">
+              <label>And your current role?</label>
+              <input type="text" name="currentRole" value="{{user._json.headline}}">
+            </div>
+            <div class="large-12 columns">
+              <label>Tell prospective mentors and mentees a little about yourself and your interests (200 characters)
+                <textarea name="aboutMe" maxlength="200" style="height:100px">{{data.aboutMe}}</textarea>
+              </label>
+            </div>
+            <div class="large-12 columns">
+              <label>Is there a goal that you hope a mentor could help to achieve? (100 characters)
+                <textarea name="goal" maxlength="100" style="height:70px">{{data.goal}}</textarea>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-4 medium-6 small-12 columns">
+              <label>I'd like to be involved with</label>
+              <div class="small-12 medium-12 large-12 columns">
+                <input id="relationship-coaching" type="checkbox" name="coaching" value="1"><label for="relationship-coaching">One-off coaching sessions</label>
+              </div>
+              <div class="small-12 medium-12 large-12 columns">
+                <input id="relationship-mentoring" type="checkbox" name="mentoring" value="1"><label for="relationship-mentoring">Longer term mentoring</label>
+              </div>
+            </div>
+            <div class="large-4 medium-6 small-12 columns">
+              <label>Preferred contact type</label>
+              <div class="small-12 medium-12 large-12 columns">
+                <input name="phone"  id="contact-phone" type="checkbox" value="1"><label for="contact-phone">Phone</label>
+              </div>
+              <div class="small-12 medium-12 large-12 columns">
+                <input name="faceToFace" id="contact-faceToFace" type="checkbox" value="1"><label for="contact-faceToFace">Face to face</label>
+              </div>
+            </div>
+            <div class="large-4 medium-6 small-12 columns end" style="height:64px !important">
+              <label>What is the minimum grade you would like your mentor to be?
+                <select name="minimumMentorGrade">
+                  <option value="-1">All</option>
+                  <option value="0">AA</option>
+                  <option value="1">AO</option>
+                  <option value="2">EO</option>
+                  <option value="3">HEO</option>
+                  <option value="4">HEO(D)/Fast Streamer</option>
+                  <option value="5">SEO</option>
+                  <option value="6">G7</option>
+                  <option value="7">G6</option>
+                  <option value="8">SCS</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-2 columns"></div>
+            <div class="large-6 large-centered columns"><hr></div>
+            <div class="large-2 columns"></div>
+          </div>
+          <div class="row">
+            <div class="large-12 medium-12 columns">
+              <h4>Which areas would you like to develop?</h4>
+              <p>Please pick at least one and give details about your experience. This helps us match you to prospective mentors. <br><span class="req">* indicates required field</span></p>
+              <div class="large-12 columns">
+                <input id="cm-checkbox-a" type="checkbox" name="areasOfInterest" value="changeManagement"><label for="cm-checkbox-a">Change management</label>
+                <div class="skills-cm radio-group">
+                  <div class="large-12">
+                    <label>What experience do you already have in this area<span class="req">*</span>
+                      <input type="text" id="experienceCm" name="experienceCm" maxlength="199">
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="large-12 columns">
+                <input id="ca-checkbox-a" type="checkbox" name="areasOfInterest" value="commercialAwareness"><label for="ca-checkbox-a">Commercial awareness</label>
+                <div class="skills-ca radio-group">
+                  <div class="large-12">
+                    <label>What experience do you already have in this area<span class="req">*</span>
+                      <input type="text" id="experienceCa" name="experienceCa" maxlength="199">
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="large-12 columns">
+                <input id="dd-checkbox-a" type="checkbox" name="areasOfInterest" value="digitalDelivery"><label for="dd-checkbox-a">Digital delivery</label>
+                <div class="skills-dd radio-group">
+                  <div class="large-12">
+                    <label>What experience do you already have in this area<span class="req">*</span>
+                      <input type="text"id="experienceDd" name="experienceDd" maxlength="199">
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="large-12 columns">
+                <input id="fm-checkbox-a" type="checkbox" name="areasOfInterest" value="financialManagement"><label for="fm-checkbox-a">Financial management</label>
+                <div class="skills-fm radio-group">
+                  <div class="large-12">
+                    <label>What experience do you already have in this area<span class="req">*</span>
+                      <input type="text" id="experienceFm" name="experienceFm" maxlength="199">
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="large-12 columns">
+                <input id="pm-checkbox-a" type="checkbox" name="areasOfInterest" value="peopleManagement"><label for="pm-checkbox-a">People management</label>
+                <div class="skills-pm radio-group">
+                  <div class="large-12">
+                    <label>What experience do you already have in this area<span class="req">*</span>
+                      <input type="text" id="experiencePm" name="experiencePm" maxlength="199">
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="large-12 columns">
+                <input id="ppm-checkbox-a" type="checkbox" name="areasOfInterest" value="progProjManagement"><label for="ppm-checkbox-a">Programme & project management</label>
+                <div class="skills-ppm radio-group">
+                  <div class="large-12">
+                    <label>What experience do you already have in this area<span class="req">*</span>
+                      <input type="text" id="experiencePpm" name="experiencePpm" maxlength="199">
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="large-12 columns">
+                <input id="ps-checkbox-a" type="checkbox" name="areasOfInterest" value="policySkills"><label for="ps-checkbox-a">Policy skills</label>
+                <div class="skills-ps radio-group">
+                  <div class="large-12">
+                    <label>What experience do you already have in this area<span class="req">*</span>
+                      <input type="text" id="experiencePs" name="experiencePs" maxlength="199">
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-2 columns"></div>
+              <div class="large-6 large-centered columns"><hr></div>
+              <div class="large-2 columns"></div>
+            </div>
+
+            <div class="large-12 medium-12 columns">
+              <h4>What experience do you have to offer?</h4>
+              <p>Again, please choose at least one and give details. <br><span class="req">* indicates required field</span></p>
+              <div class="large-12 columns">
+                <input id="cm-checkbox-b" type="checkbox" name="skillsToOffer" value="changeManagement"><label for="cm-checkbox-b">Change managment</label>
+              </div>
+              <div class="large-12 columns cm radio-group">
+                <div class="large-6 columns ">
+                  <label>Level of experience<span class="req">*</span>
+                    <select name="changeManagement">
+                      <option value="" disabled selected>Select your option</option>
+                      <option value="1" id="cm-1">I have experienced this as part of a team</option>
+                      <option value="2" id="cm-2">I have done this on my own</option>
+                      <option value="3" id="cm-3">I have a led a small team doing this</option>
+                      <option value="4" id="cm-4">I have led a large team doing this</option>
+                      <option value="5" id="cm-5">I have led a department doing this</option>
+                    </select>
+                  </label>
+                  </div>
+                  <div class="large-6 columns">
+                    <label>What was your role and what did you do<span class="req">*</span>
+                      <input type="text" id="roleCm" name="roleCm" maxlength="199">
+                    </label>
+                  </div>
+                </div>
+              <div class="large-12 columns">
+               <input id="ca-checkbox-b" type="checkbox" name="skillsToOffer" value="commercialAwareness"><label for="ca-checkbox-b">Commercial awareness</label>
+              </div>
+                <div class="large-12 columns ca radio-group">
+                  <div class="large-6 columns ">
+                    <label>Level of experience<span class="req">*</span>
+                      <select name="commercialAwareness" >
+                        <option value="" disabled selected>Select your option</option>
+                        <option value="1" id="ca-1">I have experienced this as part of a team</option>
+                        <option value="2" id="ca-2">I have done this on my own</option>
+                        <option value="3" id="ca-3">I have a led a small team doing this</option>
+                        <option value="4" id="ca-4">I have led a large team doing this</option>
+                        <option value="5" id="ca-5">I have led a department doing this</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div class="large-6 columns">
+                    <label>What was your role and what did you do<span class="req">*</span>
+                      <input type="text" id="roleCa" name="roleCa" maxlength="199">
+                    </label>
+                  </div>
+                </div>
+
+              <div class="large-12 columns">
+                <input id="dd-checkbox-b" type="checkbox" name="skillsToOffer" value="digitalDelivery"><label for="dd-checkbox-b">Digital delivery</label>
+              </div>
+              <div class="large-12 columns dd radio-group">
+                <div class="large-6 columns ">
+                  <label>Level of experience<span class="req">*</span>
+                    <select name="digitalDelivery">
+                      <option value="" disabled selected>Select your option</option>
+                      <option value="1" id="dd-1">I have experienced this as part of a team</option>
+                      <option value="2" id="dd-2">I have done this on my own</option>
+                      <option value="3" id="dd-3">I have a led a small team doing this</option>
+                      <option value="4" id="dd-4">I have led a large team doing this</option>
+                      <option value="5" id="dd-5">I have led a department doing this</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="large-6 columns">
+                  <label>What was your role and what did you do<span class="req">*</span>
+                    <input type="text" id="roleDd" name="roleDd" maxlength="199">
+                  </label>
+                </div>
+              </div>
+              <div class="large-12 columns">
+                <input id="fm-checkbox-b" type="checkbox" name="skillsToOffer" value="financialManagement"><label for="fm-checkbox-b">Financial management</label>
+              </div>
+              <div class="large-12 columns fm radio-group">
+                <div class="large-6 columns ">
+                  <label>Level of experience<span class="req">*</span>
+                    <select name="financialManagement">
+                      <option value="" disabled selected>Select your option</option>
+                      <option value="1" id="fm-1">I have experienced this as part of a team</option>
+                      <option value="2" id="fm-2">I have done this on my own</option>
+                      <option value="3" id="fm-3">I have a led a small team doing this</option>
+                      <option value="4" id="fm-4">I have led a large team doing this</option>
+                      <option value="5" id="fm-5">I have led a department doing this</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="large-6 columns">
+                  <label>What was your role and what did you do<span class="req">*</span>
+                    <input type="text" id="roleFm" name="roleFm" maxlength="199">
+                  </label>
+                </div>
+              </div>
+              <div class="large-12 columns">
+                <input id="pm-checkbox-b" type="checkbox" name="skillsToOffer" value="peopleManagement"><label for="pm-checkbox-b">People management</label>
+              </div>
+              <div class="large-12 columns pm radio-group">
+                <div class="large-6 columns ">
+                  <label>Level of experience<span class="req">*</span>
+                    <select name="peopleManagement" >
+                      <option value="" disabled selected>Select your option</option>
+                      <option value="1" id="pm-1">I have experienced this as part of a team</option>
+                      <option value="2" id="pm-2">I have done this on my own</option>
+                      <option value="3" id="pm-3">I have a led a small team doing this</option>
+                      <option value="4" id="pm-4">I have led a large team doing this</option>
+                      <option value="5" id="pm-5">I have led a department doing this</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="large-6 columns">
+                  <label>What was your role and what did you do<span class="req">*</span>
+                    <input type="text"id="rolePm" name="rolePm" maxlength="199">
+                  </label>
+                </div>
+              </div>
+              <div class="large-12 columns">
+                <input id="ppm-checkbox-b" type="checkbox" name="skillsToOffer" value="progProjManagement"><label for="ppm-checkbox-b">Programme & project management</label>
+              </div>
+              <div class="large-12 columns ppm radio-group">
+                <div class="large-6 columns ">
+                  <label>Level of experience<span class="req">*</span>
+                    <select name="progProjManagement">
+                      <option value="" disabled selected>Select your option</option>
+                      <option value="1" id="ppm-1">I have experienced this as part of a team</option>
+                      <option value="2" id="ppm-2">I have done this on my own</option>
+                      <option value="3" id="ppm-3">I have a led a small team doing this</option>
+                      <option value="4" id="ppm-4">I have led a large team doing this</option>
+                      <option value="5" id="ppm-5">I have led a department doing this</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="large-6 columns">
+                  <label>What was your role and what did you do<span class="req">*</span>
+                    <input type="text" id="rolePpm" name="rolePpm" maxlength="199">
+                  </label>
+                </div>
+              </div>
+              <div class="large-12 columns">
+                <input id="ps-checkbox-b" type="checkbox" name="skillsToOffer" value="policySkills"><label for="ps-checkbox-b">Policy skills</label>
+              </div>
+              <div class="large-12 columns ps radio-group">
+                <div class="large-6 columns ">
+                  <label>Level of experience<span class="req">*</span>
+                    <select name="policySkills">
+                      <option value="" disabled selected>Select your option</option>
+                      <option value="1" id="ps-1">I have experienced this as part of a team</option>
+                      <option value="2" id="ps-2">I have done this on my own</option>
+                      <option value="3" id="ps-3">I have a led a small team doing this</option>
+                      <option value="4" id="ps-4">I have led a large team doing this</option>
+                      <option value="5" id="ps-5">I have led a department doing this</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="large-6 columns">
+                  <label>What was your role and what did you do<span class="req">*</span>
+                    <input type="text" id="rolePs" name="rolePs" maxlength="199">
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="large-12">
+            <div class="row">
+              <div class="large-2 columns"></div>
+              <div class="large-6 large-centered columns"><hr></div>
+              <div class="large-2 columns"></div>
+            </div>
+            <h4>Rules of engagement</h4>
+            <p>Be polite, punctual and considerate. This is a professional relationship and both parties should approach it with the professionalism it deserves.</p>
+            <p>We suggest that mentors/ mentees start out by meeting for an hour or so a month and take things from there. For more information about basic mentoring / coaching frameworks, click here.</p>
+            <p>Don’t pay and don’t ask for payment. This includes poorly-veiled requests for bribes. If you want to make money, you can ask google about becoming a life coach (seriously, do this, it’s hilarious).</p>
+            <p>Don’t ask your mentor/ mentee/ coach for a job. If someone asks you for a job, we recommend subtly directing them to CSJ.</p>
+            <p>If you misuse this system, you will be banned. By using this service you acknowledge to play fair and abide by these rules, and by clicking the button below you are agreeing to our <a href="/dpp" target="_blank" style="color: black !important; font-size: 16px">data protection policy</a>.
+            <div class="large-12" style="text-align: center">
+
+              <button id="send" class="button join-button round disabled" type="submit" style="margin-top:10px">Get involved</button>
+              <h5>(You can log back in and edit your profile at any point)</h5>
+            </div>
+          </div>
+        </form>
+          </div>
+      </div>
+    </div>
+  </body>
+
+</html>

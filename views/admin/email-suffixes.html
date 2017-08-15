@@ -1,0 +1,44 @@
+{{> includes-head}}
+{{> includes-admin-menu}}
+{{> includes-header}}
+
+    <body>
+        <div class="row">
+            <h1>Add email suffix</h1>
+            <hr>
+            <div class="large-12">
+                <div class="medium-6 small-12 columns">
+                    <form method="POST" action="/admin/tools/email">
+                        <label>
+                            <h5>Add email suffix to approved list</h5>
+                            <input type="text" name="emailSuffix" placeholder="eg. gov.uk, marinemanagement.org.uk">
+                        </label>
+                        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                        <button class="button" type="submit">Add suffix</button>
+                    </form>
+                </div>
+                <div class="medium-6 small-12 columns">
+                    <h5>Valid email suffixes</h5>
+                    <table class="table large-12" style="color:black !important">
+                    <thead>
+                        <tr>
+                            <th width="300">Suffix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#validEmails}}
+                        <tr>
+                            <td>{{.}}</td>
+                        </tr>
+                        {{/validEmails}}
+                    </tbody>
+                </table>
+                </div>
+            </div>
+            <hr>
+            <div class="large-12">
+
+            </div>
+        </div>
+    </body>
+</html>

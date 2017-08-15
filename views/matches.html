@@ -1,0 +1,307 @@
+{{< layout}}
+  {{$content}}
+  <script src="/javascripts/typeahead.js" type="text/javascript"></script>
+
+    <div class="row">
+      <div class="header-panel profile-panel">
+        <h1>Your matches</h1>
+      </div>
+      <div class="small-12 columns">
+        <form action="/matches" method="POST">
+          {{#validationError}}<p class="error-message">{{validationError}}</p>{{/validationError}}
+          <div class="row">
+
+            <div class="large-10 columns">
+              <h2 class="section-title">Filters</h2>
+
+              <div class="large-6 columns ">
+                <label>Profession
+                  <select name="profession" id="professionsList">
+                    <option value="" selected="selected">All</option>
+                    {{#professionArray}}
+                    <option value="{{.}}">{{.}}</option>
+                    {{/professionArray}}
+                    }
+                  </select>
+                </label>
+              </div>
+              <div class="large-6 columns">
+                <label for="typeahead-input">Skills filter (start typing to select then click to remove):
+                </label>
+                  <div id="the-basics">
+                    <input id="typeahead-input" class="typeahead" type="text" placeholder="Begin typing to add skill">
+                  </div>
+                  <div id="your-skills">
+                  </div><br>
+                  <input id="yourSkills" name="yourSkills" type="hidden" value="{{skillsToFilter}}">
+              </div>
+              <div class="large-12 columns">
+                <button type="button" onclick="revealAdvanceFilters()" class="pointer error-message">Additional filters</button><br>
+                <div class="large-12 columns end hidden left-red-border" id="advance-filters">
+                  <div class="small-12 medium-6 large-4">
+                    <label>Location
+                      <select name="location" id="additional-location">
+                        <option value="" selected="selected">All</option>
+                        <option value="London">London</option>
+                        <option value="East of England">East of England</option>
+                        <option value="Midlands">Midlands</option>
+                        <option value="North East">North East</option>
+                        <option value="North West">North West</option>
+                        <option value="South West">South West</option>
+                        <option value="South East">South East</option>
+                        <option value="Yorkshire and Humber">Yorkshire and the Humber</option>
+                        <option value="Northern Ireland">Northern Ireland</option>
+                        <option value="Scotland">Scotland</option>
+                        <option value="Wales">Wales</option>
+                        <option value="Overseas">Overseas</option>
+                      </select>
+                    </label>
+                  </div>
+                  <label>Users who have said they are familiar with:</label>
+                  <div class="small-12 medium-6 large-4 columns">
+                    <input id="additional-bame" type="checkbox" name="bame" value="1"><label for="additional-bame">BAME issues</label>
+                  </div>
+                  <div class="small-12 medium-6 large-4 columns">
+                    <input id="additional-dependents" type="checkbox" name="dependents" value="1"><label for="additional-dependents">Caring for dependents</label>
+                  </div>
+                  <div class="small-12 medium-6 large-4 columns">
+                    <input id="additional-disability-issues" type="checkbox" name="disability" value="1"><label for="additional-disability-issues">Disability issues</label>
+                  </div>
+                  <div class="small-12 medium-6 large-4 columns">
+                    <input id="additional-LGBTQ" type="checkbox" name="lgbtq" value="1"><label for="additional-LGBTQ">LGBTQ issues</label>
+                  </div>
+                  <div class="small-12 medium-6 large-4 columns">
+                    <input id="additional-part-time" type="checkbox" name="partTime" value="1"><label for="additional-part-time">Part time working</label>
+                  </div>
+                  <div class="small-12 medium-6 large-4 columns">
+                    <input id="additional-gender-issues" type="checkbox" name="gender" value="1"><label for="additional-gender-issues">Gender issues</label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="large-2 columns">
+              <input type="hidden" name="_csrf" value="{{csrfToken}}">
+              <input type="submit" class="button round join-button" value="Update results">
+              <a href="/matches"><span class="button round join-button">Clear filters</span></a>
+            </div>
+
+
+          </div>
+        </form>
+        <hr>
+      </div>
+      <div class="small-12 columns">
+        <h4 class="centre">{{emailCount}}/4 messages sent this week</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-6 columns" style="margin-bottom:20px">
+        <div class="centre">
+          <h3>Potential mentors</h3>
+          {{#errorMessageMentors}}
+            <span class="error-message centre">No mentors found<br>Please widen your search criteria or amend your profile</span>
+          {{/errorMessageMentors}}
+          {{^errorMessageMentors}}
+            Based on your profile, we think these people would make good mentors.
+          {{/errorMessageMentors}}
+        </div>
+        {{#mentors}}
+        <div class="large-12 columns">
+          <div class="match-box">
+            <div class="match-box-header">
+              {{name}}{{#messaged}}<span style="font-size:12px; text-align:right; float:right; font-weight: bold">Contacted</span>{{/messaged}}
+            </div>
+            <div class="match-box-body">
+              <strong>Current role:</strong> {{currentRole}}<br>
+              <strong>Grade: </strong>{{grade}}<br>
+              {{#aboutMe}}<strong>About: </strong>{{aboutMe}}<br>{{/aboutMe}}
+              {{#goal}}<strong>Goal: </strong>{{goal}}<br>{{/goal}}
+              <strong>Experience:</strong> <ul style="margin: 0 0 0 2em">
+                {{#toOffer1}}<li>{{toOffer1}}</li>{{/toOffer1}}
+                {{#toOffer2}}<li>{{toOffer2}}</li>{{/toOffer2}}
+                {{#toOffer3}}<li>{{toOffer3}}</li>{{/toOffer3}}
+                {{#toOffer4}}<li>{{toOffer4}}</li>{{/toOffer4}}
+                {{#toOffer5}}<li>{{toOffer5}}</li>{{/toOffer5}}
+                {{#toOffer6}}<li>{{toOffer6}}</li>{{/toOffer6}}
+              </ul>
+              {{#profession}}<strong>Profession: </strong>{{profession}}{{/profession}}<br>
+              {{#yourSkills}}<strong>Skills: </strong>{{yourSkills}}{{/yourSkills}}
+            </div>
+            <div class="match-box-footer">
+              <a href="/email/{{idHash}}"><span class="button round contact-button join-button">{{#messaged}}View profile and email again{{/messaged}}{{^messaged}}View profile{{/messaged}}</span></a>
+            </div>
+          </div>
+        </div>
+        {{/mentors}}
+
+      </div>
+      <div class="large-6 columns "  style="margin-bottom:20px">
+        <div class="centre">
+          <h3>Potential mentees</h3>
+
+          {{#errorMessageMentees}}
+            <span class="error-message centre">No mentees found<br>Please widen your search criteria or amend your profile</span>
+          {{/errorMessageMentees}}
+          {{^errorMessageMentees}}
+            And these people are looking to learn from your experience.
+          {{/errorMessageMentees}}
+        </div>
+        {{#mentees}}
+        <div class="large-12 columns">
+          <div class="match-box">
+            <div class="match-box-header">
+              {{name}}{{#messaged}}<span style="font-size:12px; text-align:right; float:right; font-weight: bold">Contacted</span>{{/messaged}}
+            </div>
+            <div class="match-box-body">
+              <strong>Current role: </strong>{{currentRole}}<br>
+              <strong>Grade: </strong>{{grade}}<br>
+              {{#aboutMe}}<strong>About: </strong>{{aboutMe}}<br>{{/aboutMe}}
+              {{#goal}}<strong>Goal: </strong>{{goal}}<br>{{/goal}}
+              <strong>Areas of interest: </strong><ul style="margin: 0 0 0 2em">
+                {{#toDevelop1}}<li>{{toDevelop1}}</li>{{/toDevelop1}}
+                {{#toDevelop2}}<li>{{toDevelop2}}</li>{{/toDevelop2}}
+                {{#toDevelop3}}<li>{{toDevelop3}}</li>{{/toDevelop3}}
+                {{#toDevelop4}}<li>{{toDevelop4}}</li>{{/toDevelop4}}
+                {{#toDevelop5}}<li>{{toDevelop5}}</li>{{/toDevelop5}}
+                {{#toDevelop6}}<li>{{toDevelop6}}</li>{{/toDevelop6}}
+              </ul>
+              {{#profession}}<strong>Profession: </strong>{{profession}}{{/profession}}<br>
+              {{#yourSkills}}<strong>Skills: </strong>{{yourSkills}}{{/yourSkills}}
+            </div>
+            <div class="match-box-footer">
+              <a href="/email/{{idHash}}"><span class="button round contact-button join-button">{{#messaged}}View profile and email again{{/messaged}}{{^messaged}}View profile{{/messaged}}</span></a>
+            </div>
+          </div>
+        </div>
+        {{/mentees}}
+      </div>
+    </div>
+
+
+    <script type="text/javascript">
+      var currentParams = window.location.search || '';
+
+      var yourSkillsArray = [];
+      var skillsString = "{{skills}}";
+      var skills = skillsString.split(',')
+      $(document).ready(function () {
+
+        // set values of filters on page load
+        if ('{{matchProf}}' !== ''){
+          $('#professionsList').val('{{matchProf}}')
+        }
+
+        if ($('#yourSkills').val() !== ''){
+          var filterSkillsArray = $('#yourSkills').val().split(',');
+          for (var j = 0; j< filterSkillsArray.length; j++){
+            updateSkillsListDiv(filterSkillsArray[j]);
+            removeFromSkillsList(filterSkillsArray[j])
+            yourSkillsArray.push(filterSkillsArray[j]);
+          }
+        }
+
+        $('#the-basics .typeahead').typeahead({
+          hint: false,
+          highlight: true,
+          minLength: 1
+        },
+        {
+          name: 'skills',
+          source: substringMatcher(skills)
+        });
+
+        $('#the-basics').bind('typeahead:selected', function (obj, datum, name) {
+          yourSkillsArray.push(datum)
+          updateSkillsListDiv(datum)
+          removeFromSkillsList(datum)
+          updateHiddenSkillsField(datum)
+          setTimeout(function (){$('.typeahead').typeahead('val', ''); }, 10);
+        })
+
+        if (!!'{{advancedFiltersToApply.experience}}'){
+          // show advanced filter box and fill in checked boxes
+          $('#advance-filters').show();
+          var filterBoxesToCheck = '{{advancedFiltersToApply.experience}}'.split(',');
+          $.each(filterBoxesToCheck, function (i, v){
+            $("input[name='" + v + "']").prop('checked', true);
+          })
+        }
+        if (!!'{{advancedFiltersToApply.location}}') {
+          $('#advance-filters').show();
+          $("select[name='location']").val('{{advancedFiltersToApply.location}}');
+        }
+
+      });
+
+      var updateSkillsListDiv = function (skill){
+        var skillId = skill.replace(/ /g, '-')
+        $('#your-skills').append('<span class="skill-tag" id="skill-' + skillId + '" onclick="removeSkill(\'' +  skill + '\')">' + skill + '</span>')
+      }
+
+      var removeFromSkillsList = function (skill){
+        // remove from long skills list
+        for(var i = skills.length; i--;) {
+          if(skills[i] === skill) {
+              skills.splice(i, 1);
+          }
+        }
+      };
+
+      var updateHiddenSkillsField = function (skill){
+        $('#yourSkills').val( function ( index, val ) {
+          if (val == ''){
+            return skill;
+          }
+          else {
+            return val + ',' + skill;
+          }
+        });
+      };
+
+      var removeSkill = function (skill){
+        var skillId = skill.replace(/ /g, '-')
+        // add to skills list
+        skills.push(skill);
+        // remove html element
+        $('#skill-' + skillId).remove();
+        // remove from yourSkills array and update
+        for(var i = yourSkillsArray.length; i--;) {
+          if(yourSkillsArray[i] === skill) {
+              yourSkillsArray.splice(i, 1);
+          }
+        }
+
+        $('#yourSkills').val(yourSkillsArray.toString());
+        // replace yourSkills field value with
+      };
+
+      var substringMatcher = function (strs) {
+        return function findMatches(q, cb) {
+          var matches, substringRegex;
+
+          // an array that will be populated with substring matches
+          matches = [];
+
+          // regex used to determine if a string contains the substring `q`
+          substrRegex = new RegExp(q, 'i');
+
+          // iterate through the pool of strings and for any string that
+          // contains the substring `q`, add it to the `matches` array
+          $.each(strs, function (i, str) {
+            if (substrRegex.test(str)) {
+              matches.push(str);
+            }
+          });
+
+          cb(matches);
+        };
+      };
+
+      var revealAdvanceFilters = function () {
+        $('#advance-filters').toggle();
+      };
+
+    </script>
+    {{/content}}
+  {{/layout}}

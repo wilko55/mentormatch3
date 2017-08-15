@@ -1,0 +1,117 @@
+<div class="profile-info-box">
+    <div class="large-12 small-12">
+      <strong>Usually replies in: {{replyTime}}</strong>
+        <strong>Grade: </strong>{{realGrade}}</br>
+        <strong>Location: </strong>{{recepientData.location}}</br>
+    </div>
+    <div class="large-12">
+        <strong>Current role: </strong>{{recepientData.currentRole}}
+        {{#recepientData.aboutMe}}</br><strong>About: </strong>{{recepientData.aboutMe}}{{/recepientData.aboutMe}}
+        {{#recepientData.goal}}<br><strong>Goal: </strong>{{recepientData.goal}}{{/recepientData.goal}}
+    </div>
+    <div class="row">
+        {{#additionalExperience}}
+            <div class="large-12 columns">
+                <strong>Areas that they're familiar with</strong><br>
+            </div>
+            <div class="medium-4 small-6 columns end">
+                {{#recepientData.bame}}BAME issues<br>{{/recepientData.bame}}
+            </div>
+            <div class="medium-4 small-6 columns end">
+                {{#recepientData.lgbtq}}LGBTQ issues<br>{{/recepientData.lgbtq}}
+            </div>
+            <div class="medium-4 small-6 columns end">
+                {{#recepientData.gender}}Gender issues<br>{{/recepientData.gender}}
+            </div>
+            <div class="medium-4 small-6 columns end">
+                {{#recepientData.disability}}Disability issues<br>{{/recepientData.disability}}
+            </div>
+            <div class="medium-4 small-6 columns end">
+                {{#recepientData.partTime}}Part time<br>{{/recepientData.partTime}}
+            </div>
+            <div class="medium-4 small-6 columns end">
+                {{#recepientData.dependents}}Dependents<br>{{/recepientData.dependents}}
+            </div>
+        {{/additionalExperience}}
+    </div>
+</div>
+<div class="profile-info-box">
+    <strong>Areas to develop:</strong>
+    {{#recepientData.toDevelop1}}
+        <div class="skill-box cm cm-border">
+            <strong>{{recepientData.toDevelop1}}</strong><br>
+            {{recepientData.toDevelop1About}}
+        </div>
+    {{/recepientData.toDevelop1}}
+    {{#recepientData.toDevelop2}}
+        <div class="skill-box com com-border">
+            <strong>{{recepientData.toDevelop2}}</strong><br>
+            {{recepientData.toDevelop2About}}
+        </div>
+    {{/recepientData.toDevelop2}}
+    {{#recepientData.toDevelop3}}
+        <div class="skill-box dd dd-border">
+            <strong>{{recepientData.toDevelop3}}</strong><br>
+            {{recepientData.toDevelopAbout}}
+        </div>
+    {{/recepientData.toDevelop3}}
+    {{#recepientData.toDevelop4}}
+        <div class="skill-box fm fm-border">
+            <strong>{{recepientData.toDevelop4}}</strong><br>
+            {{recepientData.toDevelop4About}}
+        </div>
+    {{/recepientData.toDevelop4}}
+    {{#recepientData.toDevelop5}}
+        <div class="skill-box pm pm-border">
+            <strong>{{recepientData.toDevelop5}}</strong><br>
+            {{recepientData.toDevelop5About}}
+        </div>
+    {{/recepientData.toDevelop5}}
+    {{#recepientData.toDevelop6}}
+        <div class="skill-box ppm ppm-border">
+            <strong>{{recepientData.toDevelop6}}</strong><br>
+            {{recepientData.toDevelop6About}}
+        </div>
+    {{/recepientData.toDevelop6}}
+</div>
+<div class="profile-info-box">
+    <strong>Experience to offer:</strong>
+    {{#recepientData.toOffer1}}
+        <div class="skill-box cm cm-border">
+            <strong>{{recepientData.toOffer1}}</strong><br>
+            {{recepientData.toOffer1About}}
+        </div>
+    {{/recepientData.toOffer1}}
+    {{#recepientData.toOffer2}}
+        <div class="skill-box com com-border">
+            <strong>{{recepientData.toOffer2}}</strong><br>
+            {{recepientData.toOffer2About}}
+        </div>
+    {{/recepientData.toOffer2}}
+    {{#recepientData.toOffer3}}
+        <div class="skill-box dd dd-border">
+            <strong>{{recepientData.toOffer3}}</strong><br>
+            {{recepientData.toOffer3About}}
+        </div>
+    {{/recepientData.toOffer3}}
+    {{#recepientData.toOffer4}}
+        <div class="skill-box fm fm-border">
+            <strong>{{recepientData.toOffer4}}</strong><br>
+            {{recepientData.toOffer4About}}
+        </div>
+    {{/recepientData.toOffer4}}
+    {{#recepientData.toOffer5}}
+        <div class="skill-box pm pm-border">
+            <strong>{{recepientData.toOffer5}}</strong><br>
+            {{recepientData.toOffer5About}}
+        </div>
+    {{/recepientData.toOffer5}}
+    {{#recepientData.toOffer6}}
+        <div class="skill-box ppm ppm-border">
+            <strong>{{recepientData.toOffer6}}</strong><br>
+            {{recepientData.toOffer6About}}
+        </div>
+    {{/recepientData.toOffer6}}
+</div>
+</div>
+<div class="large-6 small-12 columns">

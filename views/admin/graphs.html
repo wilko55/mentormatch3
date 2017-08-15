@@ -1,0 +1,290 @@
+{{> includes-head}}
+{{> includes-admin-menu}}
+{{> includes-header}}
+<script src="/javascripts/chart.min.js" type="text/javascript"></script>
+
+<body>
+  <div class="row">
+    <h1>Graphs</h1>
+    <hr>
+    <div class="large-12">
+      <canvas id="grades" width="400" height="400"></canvas>
+    </div>
+    <div class="large-12">
+      <canvas id="signups" width="400" height="400"></canvas>
+    </div>
+    <div class="large-12">
+      <canvas id="sentemails" width="400" height="400"></canvas>
+    </div>
+    <div class="large-12">
+      <canvas id="replyemails" width="400" height="400"></canvas>
+    </div>
+    <div class="large-12">
+      <canvas id="professions" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          url: '/mi/joined-date'
+        }).done(function (fetchedData){
+          var counts = [];
+          var labels = [];
+          data = fetchedData;
+
+          for (var i = 0; i<data.length;i++) {
+            labels.push(data[i].date);
+            counts.push(data[i].count);
+          };
+
+          var ctx = document.getElementById("signups");
+          var signups = new Chart(ctx, {
+              type: 'line',
+              data: {
+                  labels: labels,
+                  datasets: [{
+                      label: 'Signed up',
+                      data: counts,
+                      borderWidth: 1,
+                  }]
+              },
+              options: {
+                  fill: false,
+                  lineTension: 0.1,
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero:false,
+                          },
+                          type: 'logarithmic',
+                          display:false
+                      }],
+                  },
+                  legend: false,
+                  title: {
+                      display: true,
+                      text: 'Signups by date'
+                  },
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  tooltip: {
+                    mode: 'label'
+                  }
+              }
+          });
+
+        })
+
+        // emails sent
+        $.ajax({
+          url: '/mi/emaildata/sentdate'
+        }).done(function (fetchedData){
+          var counts = [];
+          var labels = [];
+          data = fetchedData;
+
+          for (var i = 0; i<data.length;i++) {
+            labels.push(data[i].date);
+            counts.push(data[i].count);
+          };
+
+          var ctx = document.getElementById("sentemails");
+          var sentemails = new Chart(ctx, {
+              type: 'line',
+              data: {
+                  labels: labels,
+                  datasets: [{
+                      label: 'Sent emails',
+                      data: counts,
+                      borderWidth: 1,
+                  }]
+              },
+              options: {
+                  fill: false,
+                  lineTension: 0.1,
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero:false,
+                          }
+                      }]
+                  },
+                  legend: false,
+                  title: {
+                      display: true,
+                      text: 'Sent emails'
+                  },
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  tooltip: {
+                    mode: 'label'
+                  }
+              }
+          });
+
+        })
+        // emails sent
+        $.ajax({
+          url: '/mi/emaildata/replydate'
+        }).done(function (fetchedData){
+          var counts = [];
+          var labels = [];
+          data = fetchedData;
+
+          for (var i = 0; i<data.length;i++) {
+            labels.push(data[i].date);
+            counts.push(data[i].count);
+          };
+
+          var ctx = document.getElementById("replyemails");
+          var replyemails = new Chart(ctx, {
+              type: 'line',
+              data: {
+                  labels: labels,
+                  datasets: [{
+                      label: 'Reply emails',
+                      data: counts,
+                      borderWidth: 1,
+                  }]
+              },
+              options: {
+                  fill: false,
+                  lineTension: 0.1,
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero:false,
+                          }
+                      }]
+                  },
+                  legend: false,
+                  title: {
+                      display: true,
+                      text: 'Reply emails'
+                  },
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  tooltip: {
+                    mode: 'label'
+                  }
+              }
+          });
+
+        })
+
+        // emails sent
+        $.ajax({
+          url: '/mi/gradedata'
+        }).done(function (fetchedData){
+          var counts = [];
+          var labels = [];
+          data = fetchedData;
+
+          for (var i = 0; i<data.length;i++) {
+            labels.push(data[i].grade);
+            counts.push(data[i].total);
+          };
+
+          var ctx = document.getElementById("grades");
+          var grades = new Chart(ctx, {
+              type: 'pie',
+              data: {
+                  labels: labels,
+                  datasets: [{
+                      label: 'People',
+                      data: counts,
+                      borderWidth: 1,
+                      backgroundColor: [
+                          "#FF6384",
+                          "#2B82BF",
+                          "#FFCE56",
+                          "#21ED05",
+                          "#D762FF",
+                          "#693BFF",
+                          "#6DD4FF",
+                          "#D0FF09",
+                          "#FD912D"
+                      ]
+                  }]
+              },
+              options: {
+                  fill: false,
+                  lineTension: 0.1,
+                  title: {
+                      display: true,
+                      text: 'Grade breakdowns for verified users'
+                  },
+                  responsive: true,
+                  maintainAspectRatio: false,
+              }
+          });
+
+          // emails sent
+        $.ajax({
+          url: '/mi/professiondata'
+        }).done(function (fetchedData){
+          var counts = [];
+          var labels = [];
+          data = fetchedData;
+
+          for (var i = 0; i<data.length;i++) {
+            labels.push(data[i].profession);
+            counts.push(data[i].count);
+          }
+
+          var ctx = document.getElementById("professions");
+          var grades = new Chart(ctx, {
+              type: 'horizontalBar',
+              data: {
+                  labels: labels,
+                  datasets: [{
+                      label: false,
+                      data: counts,
+                      borderWidth: 1,
+                      backgroundColor: [
+                          "#FF6384",
+                          "#2B82BF",
+                          "#FFCE56",
+                          "#21ED05",
+                          "#D762FF",
+                          "#693BFF",
+                          "#6DD4FF",
+                          "#FF6384",
+                          "#2B82BF",
+                          "#FFCE56",
+                          "#21ED05",
+                          "#D762FF",
+                          "#693BFF",
+                          "#6DD4FF",
+                          "#FF6384",
+                          "#2B82BF",
+                          "#FFCE56",
+                          "#21ED05",
+                          "#D762FF",
+                          "#693BFF",
+                          "#6DD4FF"
+
+                      ]
+                  }]
+              },
+              options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  title: {
+                      display: true,
+                      text: 'Profession breakdown'
+                  },
+                  legend: {
+                    display: false
+                  }
+              }
+          });
+        })
+        });
+
+      });
+
+      
+    </script>
+  </div>
+</body>

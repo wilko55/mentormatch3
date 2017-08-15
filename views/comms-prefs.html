@@ -1,0 +1,116 @@
+{{< layout}}
+  {{$content}}
+  <div class="row">
+    <div class="header-panel profile-panel bottom-margin">
+      <h1>Account settings</h1>
+    </div>
+    <div class="large-10 large-centered">
+      <div class="large-12">
+        <h2>Communications preferences</h2>
+        <p>Here you can update your login email address, and add an additional contact email address.</p>
+        {{#helpMessage}}
+          <span>{{helpMessage}}</span>
+        {{/helpMessage}}
+        <form method="POST" action="/account-settings" id="update-comms-form">
+          <div class="row">
+            {{#localLogin}}
+            <div class="small-12 columns">
+              <div class="small-4 columns">
+                <span>Update login email: </span>
+              </div>
+              <div class="small-8 columns">
+                <input label="email" name="email" type="text" value="{{userData.email}}">
+              </div>
+            </div>
+            <br><br>
+            {{/localLogin}}
+            <div class="small-12 columns">
+              <div class="large-12 columns">
+                <span>Where would you lke to recieved emails:</span>
+              </div><br>
+              <div class="small-4 columns right-align text-right">
+                <label>{{#localLogin}}Login{{/localLogin}}{{^localLogin}}LinkedIn{{/localLogin}} email <input name="commsEmail" value="0" id="comms-email-login" type="radio" onclick="emailPrefs(0)"></label>
+              </div>
+              <div class="small-8 columns">
+                <input type="text" readonly id="emailLogin" value="{{userData.email}}">
+              </div>
+            </div>
+           {{#userData.csVerified}}
+          <div class="small-12 columns">
+            <div class="small-4 columns right-align text-right">
+              <label>Work email<span class="show-old-ie hidden">*</span> <input name="commsEmail" value="1" id="comms-email-work" type="radio" onclick="emailPrefs(1)"></label>
+            </div>
+            <div class="small-8 columns">
+              <input type="text" readonly id="emailWork" value="{{userData.csEmail}}">
+              <div class="show-old-ie hidden">
+                *Please verify your work email to use this field.
+                <br>
+              </div>
+            </div>
+          </div>
+          {{/userData.csVerified}}
+          <div class="small-12 columns">
+            <div class="small-4 columns right-align text-right">
+              <label>Other email <input name="commsEmail" value="2" id="comms-email-other" type="radio" onclick="emailPrefs(2)"></label>
+            </div>
+            <div class="small-8 columns">
+              <input type="text" readonly id="emailOther" name="emailOther" value="{{userData.emailOther}}">
+            </div>
+          </div>
+          <br>
+          <div class="small-12 columns">
+            <br>
+            <div class="small-8 columns">
+              Pause match emails (you will no longer recieve match requests from mentors or mentees)
+            </div>
+            <div class="small-4 columns">
+              <div class="small-6 text-right columns">
+                <label>Yes <input type="radio" id="pause-yes" value="1" name="pauseMentoringComms"></label>
+              </div>
+              <div class="small-6 columns">
+                <label >No <input type="radio" id="pause-no" value="0" name="pauseMentoringComms"></label>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="centre">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+            <a href="/profile" class="button join-button">Cancel</a>
+            <button type="submit" class="button " style="">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+
+      $(document).ready(function () {
+        emailPrefs({{userData.commsEmail}})
+      })
+
+      var checkPauseComms = {{userData.pauseMentoringComms}}{{data.pauseMentoringComms}} || 0;
+      if (checkPauseComms === 1) {
+        $("#pause-yes").prop("checked", true)
+      }
+      else {
+        $("#pause-no").prop("checked", true)
+      }
+
+      function emailPrefs(state){
+        if (state === 0) {
+          $("#comms-email-login").prop("checked", true);
+          $("#emailOther").attr("readonly", true);
+        }
+        else if (state === 1) {
+          $("#comms-email-work").prop("checked", true);
+          $("#emailOther").attr("readonly", true);
+        }
+        else if (state === 2) {
+          $("#comms-email-other").prop("checked", true);
+          $("#emailLogin").attr("readonly", true);
+          $("#emailWork").attr("readonly", true);
+          $("#emailOther").attr("readonly", false);
+        }
+      }
+    </script>
+  {{/content}}
+{{/layout}}
