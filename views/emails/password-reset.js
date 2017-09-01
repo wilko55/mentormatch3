@@ -2,7 +2,8 @@
 
 const config = require('../../config').config();
 const moment = require('moment');
-const crypto = require('../../data/crypto');
+const crypto = require('../../helpers/crypto');
+
 let passwordReset = function (emailData) {
   // generate hash here?
 

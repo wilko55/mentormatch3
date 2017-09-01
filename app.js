@@ -11,7 +11,6 @@ const logger = require('./helpers/logger');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-// const LocalStrategy = require('passport-local').Strategy;
 const helmet = require('helmet');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
@@ -62,7 +61,6 @@ app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
 
 app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'views'));
-
 app.use(require('express-partial-templates')(app));
 app.engine('html', require('hogan-express-strict'));
 
@@ -97,20 +95,25 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.locals.user = req.user;
   next();
 });
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   // res.locals.admin = middleware.isAdmin;
   next();
 });
 
 app.use(csrfProtection);
 
+const models = require('./models');
+
 require('./routes/unauthorised.js')(app);
 require('./routes/profile.js')(app);
+require('./routes/auth.js')(app, passport);
+
+require('./helpers/passport')(passport, models.user);
 
 app.use(function (err, req, res, next) {
   if (err.code !== 'EBADCSRFTOKEN') return next(err);
@@ -124,33 +127,15 @@ app.use(function (err, req, res, next) {
 app.get('*', function (req, res) {
   res.status(404);
   logger.error('404 error. Page ' + req.url + ' not found. ');
-  res.render('/404');
+  res.render('errors/404');
 });
 
-passport.serializeUser(function (user, done) {
-  done(null, user);
-});
 
-// passport.deserializeUser(function (obj, done) {
-//   if (obj.provider !== 'linkedin') {
-//     DB.knex('mentors').where({ id: obj.id }).then(function (user) {
-//       done(null, user[0]);
-//     }).catch(function (err) {
-//       console.log('error doing user action (local):', err);
-//       return done(null, obj);
-//     });
-//   } else {
-//     DB.knex('mentors').where({ linkedInId: obj.id }).then(function (data) {
-//       if (data.length === 0) {
-//         return done(null, false);
-//       }
-//       return done(null, data[0]);
-//     }).catch(function (err) {
-//       console.log('error doing user action (li):', err);
-//       return done(null, obj);
-//     });
-//   }
-// });
+models.sequelize.sync().then(() => {
+  console.log('Database looking ok');
+}).catch((err) => {
+  console.log(err, 'Something went wrong with the Database update');
+});
 
 // error handling
 app.use(function (err, req, res, next) {

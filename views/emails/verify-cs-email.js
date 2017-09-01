@@ -2,7 +2,7 @@
 
 // let base64url = require('base64-url');
 let config = require('../../config').config();
-const crypto = require('../../data/crypto');
+const crypto = require('../../helpers/crypto');
 
 let validateEmail = function (userData, emailData) {
   // create hash - add timestamp?

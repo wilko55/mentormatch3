@@ -12,7 +12,7 @@
         {{^emailExistsError}}
         <p>You've told us that your work email is <strong>{{workEmail}}</strong> - if that's not correct, please <a href="/">click here</a> to sign up again</p><br>
           <div class="medium-5 columns" >
-            <form method="POST" action="/signup" id="sign-up-form">
+            <form method="POST" action="/sign-up" id="sign-up-form">
               <span class="show-old-ie show-ie9 hidden">Name:</span>
               <label for="name"><strong>Name</strong></label>
               {{#errors.validation.name}}<span class="error-message">{{errors.validation.name}}</span>{{/errors.validation.name}}

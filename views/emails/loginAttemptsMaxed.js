@@ -1,8 +1,9 @@
 'use strict';
 
-const crypto = require('../../data/crypto');
+const crypto = require('../../helpers/crypto');
 let config = require('../../config').config();
 let moment = require('moment');
+
 let passwordReset = function (emailData) {
   // generate hash here?
 

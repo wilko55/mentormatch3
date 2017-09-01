@@ -2,8 +2,8 @@
   {{$content}}
     <div class="row">
       <div class="header-panel profile-panel">
-        <h1>{{data.name}}</h1>
-        <p>{{data.currentRole}}</p>
+        <h1>{{user.name}}</h1>
+        <p>{{user.currentRole}}</p>
         <a href="/edit-profile" class="edit-profile-button pointer"><span class=""><i class="fa fa-pencil"></i> Edit profile</span></a>
       </div>
     </div>
@@ -11,7 +11,7 @@
       <div class="large-7 columns">
         <div class="child-panel profile-panel">
           <h2 class="section-title">About</h2>
-          <p>{{data.aboutMe}}</p>
+          <p>{{user.aboutMe}}</p>
         </div>
       </div>
       <div class="large-5 columns">
@@ -23,13 +23,13 @@
       <div class="large-7 columns">
         <div class="child-panel profile-panel">
           <h2 class="section-title">Goal</h2>
-          <p>{{data.goal}}</p>
+          <p>{{user.goal}}</p>
         </div>
       </div>
       <div class="large-5 columns end">
         <div class="child-panel profile-panel">
           <h2 class="section-title">Profession</h2>
-          <p>{{data.profession}}</p>
+          <p>{{user.profession}}</p>
         </div>
       </div>
     </div>
@@ -43,36 +43,36 @@
             </div>
             {{/completedProfile.toDevelop}}
             <h2 class="section-title">Areas you would like to develop</h2>
-            {{#data.toDevelop1}}
+            {{#user.toDevelop1}}
             <div class="small-12">
-              <div class="skill-box cm cm-border"><p><strong>{{data.toDevelop1}}</strong></p><p>{{data.toDevelop1About}}</p></div>
+              <div class="skill-box cm cm-border"><p><strong>{{user.toDevelop1}}</strong></p><p>{{user.toDevelop1About}}</p></div>
             </div>
-            {{/data.toDevelop1}}
-            {{#data.toDevelop2}}
+            {{/user.toDevelop1}}
+            {{#user.toDevelop2}}
             <div class="small-12">
-              <div class="skill-box com com-border"><p><strong>{{data.toDevelop2}}</strong></p><p>{{data.toDevelop2About}}</p></div>
+              <div class="skill-box com com-border"><p><strong>{{user.toDevelop2}}</strong></p><p>{{user.toDevelop2About}}</p></div>
             </div>
-            {{/data.toDevelop2}}
-            {{#data.toDevelop3}}
+            {{/user.toDevelop2}}
+            {{#user.toDevelop3}}
             <div class="small-12">
-              <div class="skill-box ca ca-border"><p><strong>{{data.toDevelop3}}</strong></p><p>{{data.toDevelop3About}}</p></div>
+              <div class="skill-box ca ca-border"><p><strong>{{user.toDevelop3}}</strong></p><p>{{user.toDevelop3About}}</p></div>
             </div>
-            {{/data.toDevelop3}}
-            {{#data.toDevelop4}}
+            {{/user.toDevelop3}}
+            {{#user.toDevelop4}}
             <div class="small-12">
-              <div class="skill-box dd dd-border"><p><strong>{{data.toDevelop4}}</strong></p><p>{{data.toDevelop4About}}</p></div>
+              <div class="skill-box dd dd-border"><p><strong>{{user.toDevelop4}}</strong></p><p>{{user.toDevelop4About}}</p></div>
             </div>
-            {{/data.toDevelop4}}
-            {{#data.toDevelop5}}
+            {{/user.toDevelop4}}
+            {{#user.toDevelop5}}
             <div class="small-12">
-              <div class="skill-box fm fm-border"><p><strong>{{data.toDevelop5}}</strong></p><p>{{data.toDevelop5About}}</p></div>
+              <div class="skill-box fm fm-border"><p><strong>{{user.toDevelop5}}</strong></p><p>{{user.toDevelop5About}}</p></div>
             </div>
-            {{/data.toDevelop5}}
-            {{#data.toDevelop6}}
+            {{/user.toDevelop5}}
+            {{#user.toDevelop6}}
             <div class="small-12">
-              <div class="skill-box pm pm-border"><p><strong>{{data.toDevelop6}}</strong></p><p>{{data.toDevelop6About}}</p></div>
+              <div class="skill-box pm pm-border"><p><strong>{{user.toDevelop6}}</strong></p><p>{{user.toDevelop6About}}</p></div>
             </div>
-            {{/data.toDevelop6}}
+            {{/user.toDevelop6}}
           </div>
           <div class="large-12 small-12 child-panel profile-panel">
             {{#completedProfile.toOffer}}
@@ -81,36 +81,36 @@
             </div>
             {{/completedProfile.toOffer}}
             <h2 class="section-title">Experience you can offer</h2>
-            {{#data.toOffer1}}
+            {{#user.toOffer1}}
             <div class="small-12">
-              <div class="skill-box cm cm-border"><p><strong>{{data.toOffer1}}</strong></p><p>{{data.toOffer1About}}</p></div>
+              <div class="skill-box cm cm-border"><p><strong>{{user.toOffer1}}</strong></p><p>{{user.toOffer1About}}</p></div>
             </div>
-            {{/data.toOffer1}}
-            {{#data.toOffer2}}
+            {{/user.toOffer1}}
+            {{#user.toOffer2}}
             <div class="small-12">
-              <div class="skill-box com com-border"><p><strong>{{data.toOffer2}}</strong></p><p>{{data.toOffer2About}}</p></div>
+              <div class="skill-box com com-border"><p><strong>{{user.toOffer2}}</strong></p><p>{{user.toOffer2About}}</p></div>
             </div>
-            {{/data.toOffer2}}
-            {{#data.toOffer3}}
+            {{/user.toOffer2}}
+            {{#user.toOffer3}}
             <div class="small-12">
-              <div class="skill-box ca ca-border"><p><strong>{{data.toOffer3}}</strong></p><p>{{data.toOffer3About}}</p></div>
+              <div class="skill-box ca ca-border"><p><strong>{{user.toOffer3}}</strong></p><p>{{user.toOffer3About}}</p></div>
             </div>
-            {{/data.toOffer3}}
-            {{#data.toOffer4}}
+            {{/user.toOffer3}}
+            {{#user.toOffer4}}
             <div class="small-12">
-              <div class="skill-box dd dd-border"><p><strong>{{data.toOffer4}}</strong></p><p>{{data.toOffer4About}}</p></div>
+              <div class="skill-box dd dd-border"><p><strong>{{user.toOffer4}}</strong></p><p>{{user.toOffer4About}}</p></div>
             </div>
-            {{/data.toOffer4}}
-            {{#data.toOffer5}}
+            {{/user.toOffer4}}
+            {{#user.toOffer5}}
             <div class="small-12">
-              <div class="skill-box fm fm-border"><p><strong>{{data.toOffer5}}</strong></p><p>{{data.toOffer5About}}</p></div>
+              <div class="skill-box fm fm-border"><p><strong>{{user.toOffer5}}</strong></p><p>{{user.toOffer5About}}</p></div>
             </div>
-            {{/data.toOffer5}}
-            {{#data.toOffer6}}
+            {{/user.toOffer5}}
+            {{#user.toOffer6}}
             <div class="small-12">
-              <div class="skill-box pm pm-border"><p><strong>{{data.toOffer6}}</strong></p><p>{{data.toOffer6About}}</p></div>
+              <div class="skill-box pm pm-border"><p><strong>{{user.toOffer6}}</strong></p><p>{{user.toOffer6About}}</p></div>
             </div>
-            {{/data.toOffer6}}
+            {{/user.toOffer6}}
           </div>
         </div>
       </div>
@@ -122,8 +122,8 @@
               <p><strong>You are looking for:</strong></p>
             </div>
             <div class="large-7 small-7 columns">
-              <p>One-off advice {{#data.coaching}}<i class="fa fa-check"></i></p>{{/data.coaching}}{{^data.coaching}}<i class="fa fa-times"></i></p>{{/data.coaching}}
-              <p>Longer term mentoring {{#data.mentoring}}<i class="fa fa-check"></i></p>{{/data.mentoring}}{{^data.mentoring}}<i class="fa fa-times"></i></p>{{/data.mentoring}}
+              <p>One-off advice {{#user.coaching}}<i class="fa fa-check"></i></p>{{/user.coaching}}{{^user.coaching}}<i class="fa fa-times"></i></p>{{/user.coaching}}
+              <p>Longer term mentoring {{#user.mentoring}}<i class="fa fa-check"></i></p>{{/user.mentoring}}{{^user.mentoring}}<i class="fa fa-times"></i></p>{{/user.mentoring}}
             </div>
           </div><br>
           <div class="row">
@@ -131,8 +131,8 @@
               <p><strong>Contact type:</strong></p>
             </div>
             <div class="large-7 small-7 columns">
-              <p>Face to face {{#data.faceToFace}}<i class="fa fa-check"></i></p>{{/data.faceToFace}}{{^data.faceToFace}}<i class="fa fa-times"></i></p>{{/data.faceToFace}}
-              <p>Phone {{#data.phone}}<i class="fa fa-check"></i></p>{{/data.phone}}{{^data.phone}}<i class="fa fa-times"></i></p>{{/data.phone}}
+              <p>Face to face {{#user.faceToFace}}<i class="fa fa-check"></i></p>{{/user.faceToFace}}{{^user.faceToFace}}<i class="fa fa-times"></i></p>{{/user.faceToFace}}
+              <p>Phone {{#user.phone}}<i class="fa fa-check"></i></p>{{/user.phone}}{{^user.phone}}<i class="fa fa-times"></i></p>{{/user.phone}}
             </div>
           </div><br>
           <div class="row">
@@ -140,7 +140,7 @@
               <p><strong>What you're looking for in a mentor:</strong></p>
             </div>
             <div class="large-12 small-7 columns">
-              {{#data.minimumMentorGrade}} <p>Minimum matching grade: {{realMinGrade}}</p> {{/data.minimumMentorGrade}}{{^data.minimumMentorGrade}}No minimum grade</p>{{/data.minimumMentorGrade}}
+              {{#user.minimumMentorGrade}} <p>Minimum matching grade: {{realMinGrade}}</p> {{/user.minimumMentorGrade}}{{^user.minimumMentorGrade}}No minimum grade</p>{{/user.minimumMentorGrade}}
             </div>
           </div><br>
         </div>
@@ -151,14 +151,14 @@
               <strong><p>Do you have experience of any of the following, which you would be happy to discuss with a mentor or mentee?</p><br></strong>
             </div>
             <div class="large-6 small-6 columns">
-              <p>BAME issues {{#data.bame}}<i class="fa fa-check"></i></p>{{/data.bame}}{{^data.bame}}<i class="fa fa-times"></i></p>{{/data.bame}}
-              <p>Caring for dependents {{#data.dependents}}<i class="fa fa-check"></i></p>{{/data.dependents}}{{^data.dependents}}<i class="fa fa-times"></i></p>{{/data.dependents}}
-              <p>Disability issues {{#data.disability}}<i class="fa fa-check"></i></p>{{/data.disability}}{{^data.disability}}<i class="fa fa-times"></i></p>{{/data.disability}}
+              <p>BAME issues {{#user.bame}}<i class="fa fa-check"></i></p>{{/user.bame}}{{^user.bame}}<i class="fa fa-times"></i></p>{{/user.bame}}
+              <p>Caring for dependents {{#user.dependents}}<i class="fa fa-check"></i></p>{{/user.dependents}}{{^user.dependents}}<i class="fa fa-times"></i></p>{{/user.dependents}}
+              <p>Disability issues {{#user.disability}}<i class="fa fa-check"></i></p>{{/user.disability}}{{^user.disability}}<i class="fa fa-times"></i></p>{{/user.disability}}
             </div>
             <div class="large-6 small-6 columns">
-              <p>Gender issues {{#data.gender}}<i class="fa fa-check"></i></p>{{/data.gender}}{{^data.gender}}<i class="fa fa-times"></i></p>{{/data.gender}}
-              <p>LGBTQ issues {{#data.lgbtq}}<i class="fa fa-check"></i></p>{{/data.lgbtq}}{{^data.lgbtq}}<i class="fa fa-times"></i></p>{{/data.lgbtq}}
-              <p>Part time working {{#data.partTime}}<i class="fa fa-check"></i></p>{{/data.partTime}}{{^data.partTime}}<i class="fa fa-times"></i></p>{{/data.partTime}}
+              <p>Gender issues {{#user.gender}}<i class="fa fa-check"></i></p>{{/user.gender}}{{^user.gender}}<i class="fa fa-times"></i></p>{{/user.gender}}
+              <p>LGBTQ issues {{#user.lgbtq}}<i class="fa fa-check"></i></p>{{/user.lgbtq}}{{^user.lgbtq}}<i class="fa fa-times"></i></p>{{/user.lgbtq}}
+              <p>Part time working {{#user.partTime}}<i class="fa fa-check"></i></p>{{/user.partTime}}{{^user.partTime}}<i class="fa fa-times"></i></p>{{/user.partTime}}
             </div>
           </div><br>
         </div>

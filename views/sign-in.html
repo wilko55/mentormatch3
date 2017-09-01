@@ -1,0 +1,54 @@
+
+
+
+{{< layout}}
+  {{$content}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <div class="row" >
+    <div class="header-panel profile-panel bottom-margin">
+      <h1>Sign in</h1>
+    </div>
+    <div class="large-10 large-centered">
+      {{errorMessage}}
+
+    <form id="signin" name="sign-in" method="post" action="sign-in">
+        <label for="email">Email Address</label>
+        <input class="text" name="email" type="text" />
+        <label for="password">Password</label>
+        <input name="password" type="password" />
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+        <input class="btn" type="submit" value="Sign In" />
+    </form>
+  </div>
+  <script>
+    $('#password').keyup(function() {
+      var regexes = {
+        passwordLength: /^[\s\S]{8,32}$/,
+        passwordUpper: /[A-Z]/,
+        passwordLower: /[a-z]/,
+        passwordNumber: /[0-9]/,
+        passwordSpecial: /[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/,
+      };
+      var commonPasswords = /mentormatch|password|123456|querty|starwars|monkey|football|123456789|111111|qwertyuiop|google|1q2w3e4r5t|123qwe|BlackCoffeeWith10Sugars|zxcvbnm/ig;
+
+      var validPassword = true;
+      for (var regex in regexes) {
+        if (regexes.hasOwnProperty(regex)) {
+          var el = document.getElementById(regex)
+          if (document.getElementById('password').value.match(regexes[regex])) {
+            el.className = "fa fa-check password-icon";
+          } else {
+            el.className = "fa fa-times password-icon";
+          }
+        }
+      }
+      if (!document.getElementById('password').value.match(commonPasswords)) {
+        document.getElementById('commonPasswords').className = "fa fa-check password-icon";
+      } else {
+        document.getElementById('commonPasswords').className = "fa fa-times password-icon";
+      }
+    });
+  </script>
+  {{/content}}
+{{/layout}}
