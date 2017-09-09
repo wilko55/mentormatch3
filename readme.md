@@ -1,5 +1,7 @@
 # Mentor Match v3 readme
 
+Rebuilding mentormatch.org.uk to be better, stronger, faster...
+
 ## What's new?
 1. Proper linting
 2. Sequelize ORM with defined models/relationships
