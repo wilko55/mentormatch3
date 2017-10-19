@@ -1,6 +1,11 @@
 # Mentor Match v3 readme
 
-Rebuilding mentormatch.org.uk to be better, stronger, faster...
+## Getting started
+1. Get node (v6+), mysql, git installed
+2. `git clone` repo
+3. `npm install` to get dependencies
+4. `npm run sass` to get css
+5. http://localhost:3000
 
 ## What's new?
 1. Proper linting
@@ -22,7 +27,7 @@ Rebuilding mentormatch.org.uk to be better, stronger, faster...
       - js
       - images
     - routes (as simple a breakdown as possible - calls relevant middleware and throws request over to a controller)
-    - test ()
+    - test
     - views (kept mm2 templates for now as re-templating or further tidying can be done in the future)
 ```
 ## Todo
