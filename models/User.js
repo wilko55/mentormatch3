@@ -91,5 +91,13 @@ module.exports = function (sequelize, DataTypes) {
     User.hasMany(models.email);
   };
 
+  User.findByEmail = function (email) {
+    return User.findOne({ where: { $or: [
+      { email: email },
+      { csEmail: email },
+      { emailOther: email }
+    ] } });
+  };
+
   return User;
 };

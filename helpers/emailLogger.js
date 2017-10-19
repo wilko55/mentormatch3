@@ -6,6 +6,7 @@ const EmailLog = models.email;
 
 module.exports = {
   log: function (senderId, recepientId, message, type) {
+    // return true
     return new Promise(function (resolve, reject) {
       EmailLog.create({ senderId: senderId, recepientId: recepientId, emailBody: message, type: type })
       .then(function () {

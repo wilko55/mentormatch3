@@ -45,7 +45,6 @@ class EmailSender {
     } else {
       emailBody = data.emailType;
     }
-    console.log('emailBDOY::', emailBody);
     return emailBody;
   }
 
@@ -57,14 +56,9 @@ class EmailSender {
     EmailSender.getUserData(this.senderId)
     .then((data) => {
       senderData = data;
-    })
-    .then(() => {
-      // get recepiend data
       EmailSender.getUserData(this.recepientId)
       .then((data) => {
         recepientData = data;
-      })
-      .then(() => {
         // prep email data
         if (that.emailData) {
           that.emailData.newBody = EmailSender.getEmailBody(this);
@@ -72,7 +66,7 @@ class EmailSender {
           that.emailData = {};
         }
 
-        let data = {
+        let messageData = {
           from: 'Mentor Match <hello@mentormatch.org.uk>',
           to: recepientData.preferredEmail,
           subject: this.subject || 'Hello from MentorMatch!',
@@ -85,15 +79,15 @@ class EmailSender {
           that.emailData.logId = loggerData;
 
           if (that.emailData) {
-            data.html = emailTemplates[that.emailType](senderData, recepientData, that.emailData);
+            messageData.html = emailTemplates[that.emailType](senderData, recepientData, that.emailData);
           } else {
-            data.html = emailTemplates[that.emailType](senderData, recepientData);
+            messageData.html = emailTemplates[that.emailType](senderData, recepientData);
           }
 
           let hashedReplyUrl = crypto.encrypt('senderEmail=' + senderData.preferredEmail + '&senderId=' + senderData.id + '&recepientId=' + recepientData.id + '&logId=' + that.emailData.logId);
           data['h:Reply-To'] = 'reply-' + hashedReplyUrl + '@reply.mentormatch.org.uk';
           // try to send email - fall back and remove from log if problem
-          mailgun.messages().send(data, function (error) {
+          mailgun.messages().send(messageData, function (error) {
             if (error) {
               console.log('error!', error);
               emailLogger.remove(that.emailData.logId);
@@ -122,7 +116,7 @@ class EmailSender {
         html: emailTemplates[that.emailType](recepientData, emailData)
       };
       mailgun.messages().send(data, function (error) {
-        emailLogger.log(recepientData.id, recepientData.id, 'Send to self', that.emailType)
+        emailLogger.log(recepientData.id, recepientData.id, 'Send to self', that.emailType);
         if (error) {
           console.log('To self email error', error);
         }
@@ -130,30 +124,26 @@ class EmailSender {
     });
   }
 
-  sendToAnonUser(emailData) {
+  sendToAnonUser() {
     let recepientData;
     let that = this;
 
     recepientData = {
-      email: emailData.email
+      email: that.emailData.email
     };
     let data = {
       from: 'Mentor Match <hello@mentormatch.org.uk>',
       to: recepientData.email,
       subject: that.subject || 'Hello from Mentor Match!',
-      html: emailTemplates[that.emailType](recepientData, emailData)
+      html: emailTemplates[that.emailType](recepientData, this.emailData)
     };
 
-    User.findOne({ where: { $or: [
-      { email: recepientData.email },
-      { csEmail: recepientData.email },
-      { emailOther: recepientData.email }
-    ] } })
-    .then(function (model) {
-      if (model.length > 0) {
-        recepientData.guid = model[0].guid;
+    User.findByEmail(recepientData.email)
+    .then(function (userData) {
+      if (userData) {
+        recepientData.guid = userData.guid;
         mailgun.messages().send(data, function (error) {
-          emailLogger.log(0, recepientData.id, 'Send to anon - sending to user ' + model[0].id, that.emailType);
+          emailLogger.log(0, recepientData.id, 'Send to anon - sending to user ' + userData.id, that.emailType);
           if (error) {
             console.log('To anon email error', error);
           }
@@ -168,17 +158,14 @@ class EmailSender {
       }
     })
     .catch((err) => {
-      console.log('no guid', err);
-      mailgun.messages().send(data, function (error) {
-        emailLogger.log(0, recepientData.id, 'Send to anon - error no guid', that.emailType);
-        if (error) {
-          console.log('To anon email error', error);
-        }
-      });
+      // mailgun.messages().send(data, function (error) {
+        // emailLogger.log(0, recepientData.id, 'Send to anon - error no guid', that.emailType);
+        // if (error) {
+          // console.log('To anon email error', error);
+        // }
+      // });
     });
   }
 }
-
-
 // get user details
 module.exports = EmailSender;
