@@ -7,6 +7,9 @@ const EmailSender = require('../helpers/emailSender');
 const models = require('../models');
 
 const User = models.user;
+const validateEmail = require('../helpers/validation/emailValidation');
+const crypto = require('../helpers/crypto');
+const validation = require('../helpers/validation/emailValidation');
 
 module.exports = {
   getBlog: (req, res) => {
@@ -18,8 +21,6 @@ module.exports = {
       });
   },
   verifyEmail: (req, res) => {
-    let validateEmail = require('../helpers/validation/emailSuffixValidation');
-
     validateEmail.emailSuffix(req.body.workEmail).then((emailSuffixIsValid) => {
       let errorMessage;
       let helpMessage;
@@ -38,7 +39,7 @@ module.exports = {
           { emailOther: req.body.workEmail }
         ] } }).then((userData) => {
           if (!userData) {
-            new EmailSender(null, 'verifyEmail', {}, 'Please verify your email').sendToAnonUser({ email: req.body.workEmail });
+            new EmailSender(null, 'verifyEmail', {}, 'Please verify your email', { email: req.body.workEmail }).sendToAnonUser();
           }
         });
 
@@ -46,5 +47,38 @@ module.exports = {
         res.render('verify-email', { title: config.title + ' - verify your email', workEmailSent: true, helpMessage: helpMessage, csrfToken: req.csrfToken() });
       }
     });
+  },
+  signUp: (req, res) => {
+    if (typeof req.session === 'undefined') {
+      req.session = {
+        errors: {}
+      };
+    }
+    // if no hash then redirect to homepage with flash warning
+    let decryptSafeUrl = crypto.decrypt(req.params.hash);
+    let email = decryptSafeUrl.split("?")[1];
+    if (!validation.emailAddress(email)) {
+      console.log('invalid email hash');
+      res.redirect('/');
+    } else {
+      let emailLower = email.toLowerCase();
+      req.session.workEmail = emailLower;
+      User.findByEmail(emailLower)
+      .then(function (userData) {
+        if (userData) {
+          if (userData.signedUp === 1) {
+            res.render('signup', { emailExistsError: true, csrfToken: req.csrfToken() });
+          } else {
+            // user exists but they never completed signup - delete and let them complete signup again
+            User.destroy.where({ id: userData.id })
+            .then(function () {
+              res.render('signup', { title: config.title + ' - Sign up', workEmail: email, errors: req.session.errors, csrfToken: req.csrfToken() });
+            });
+          }
+        } else {
+          res.render('signup', { title: config.title + ' - Sign up', workEmail: email, errors: req.session.errors, csrfToken: req.csrfToken() });
+        }
+      });
+    }
   }
 };

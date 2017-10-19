@@ -1,6 +1,5 @@
-const models = require('../../models');
+const ValidEmailSuffixes = require('../../models').validEmailSuffixes;
 
-const ValidEmailSuffixes = models.validEmailSuffixes;
 // let emailSuffix = 'gov.uk';
 
 module.exports = {

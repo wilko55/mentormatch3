@@ -5,14 +5,14 @@
   "scripts": {
     "start": "node app.js",
     "test": "mocha --recursive -R spec ./test/",
+    "istanbul": "istanbul cover _mocha --recursive -R ./test/**/*/*",
     "sass": "./node_modules/node-sass/bin/node-sass ./assets/scss/style.scss ./public/stylesheets/style.css",
     "sass-old": "./node_modules/node-sass/bin/node-sass ./assets/scss/all-old-ie.scss ./public/stylesheets/all-old-ie.css",
     "sass-ie9": "./node_modules/node-sass/bin/node-sass ./assets/scss/ie9.scss ./public/stylesheets/ie9.css",
     "watch-sass": "nodemon -e scss -x \"npm run sass\"",
     "watch-sass-old": "nodemon -e scss -x \"npm run sass-old\"",
     "watch-sass-ie9": "nodemon -e scss -x \"npm run sass-ie9\"",
-    "watch": "npm run watch-sass & npm run watch-sass-old & npm run watch-sass-ie9 & nodemon app.js",
-    "istanbul": "istanbul cover _mocha --recursive -R ./test/**/*"
+    "watch": "npm run watch-sass & npm run watch-sass-old & npm run watch-sass-ie9 & nodemon app.js"
   },
   "dependencies": {
     "axios": "^0.7.0",
@@ -67,9 +67,12 @@
     "eslint": "^3.16.0",
     "eslint-config-airbnb-base": "^11.1.0",
     "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-mocha": "^4.11.0",
     "mocha": "3.2.0",
+    "proxyquire": "^1.8.0",
     "sinon": "^1.17.6",
     "sinon-as-promised": "^4.0.2",
+    "sinon-chai": "^2.14.0",
     "sinon-stub-promise": "^4.0.0",
     "superagent": "^3.4.1"
   },
@@ -78,5 +81,12 @@
     "test": "test"
   },
   "author": "Andy Wilkinson",
-  "description": ""
+  "description": "",
+  "nyc": {
+    "exclude": [
+      "**/public/**",
+      "**/views/**",
+      "**/test/**"
+    ]
+  }
 }
