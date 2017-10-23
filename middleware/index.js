@@ -31,17 +31,16 @@ module.exports = {
       res.redirect('/');
     }
   },
-  // >> might be necessary when determining how user logged in so keeping for now
-  // liOrLocal: function (req) {
-  //   let userReferrer = {};
-  //   if (req.user.provider === 'linkedin') {
-  //     // catches linkedin users after they first register
-  //     userReferrer.linkedInId = req.user.linkedInId || req.user.id;
-  //   } else {
-  //     userReferrer.email = req.user.email;
-  //   }
-  //   req.user.liOrLocal = userReferrer;
-  // },
+  liOrLocal: function (req, res, next) {
+    let userReferrer = {};
+    if (req.user.linkedInId === '') {
+      userReferrer.linkedInId = req.user.linkedInId;
+    } else {
+      userReferrer.email = req.user.email;
+    }
+    req.user.liOrLocal = userReferrer;
+    next();
+  },
   sendAuthedUserToProfile: function (req, res, next) {
     if (req.isAuthenticated()) {
       res.redirect('/profile');
