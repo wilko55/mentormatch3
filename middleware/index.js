@@ -33,7 +33,7 @@ module.exports = {
   },
   liOrLocal: function (req, res, next) {
     let userReferrer = {};
-    if (req.user.linkedInId === '') {
+    if (req.user.linkedInId !== '') {
       userReferrer.linkedInId = req.user.linkedInId;
     } else {
       userReferrer.email = req.user.email;

@@ -8,6 +8,7 @@ const config = require('../config').config();
 
 const csrfProtection = csurf({ cookie: true });
 const User = model.user;
+const Professions = model.professions;
 
 module.exports = function (app) {
   app.get('/profile', middleware.isAuthenticated, profileController.getProfile);
@@ -38,9 +39,10 @@ module.exports = function (app) {
           res.redirect('/');
         }
       }
+      Professions.findAllProfessions()
 
       // DB.knex.raw("select profession from professions order by profession asc")
-      // .then(function (professions) {
+      .then(function (professions) {
       //   // get users skills
       //   new ProfSkills.SkillsList({ userId: req.user.id }).fetch()
       //   .then(function (userSkills) {
@@ -73,12 +75,12 @@ module.exports = function (app) {
       //       skillsColNames[0].forEach(function (element) {
       //         let newElement = element.column_name.charAt(0).toUpperCase() + element.column_name.replace(/([A-Z])/g, ' $1').toLowerCase().substring(1, element.length);
       //         skills.push(newElement);
-      //       });
-      console.log('>>>>>>>', model)
+            // });
+            console.log(professions);
             res.render('edit-profile', { title: config.title + ' - Profile', data: userData, skillsList: config.skillsList, completedProfile: req.session.completedProfile, dormantUser: dormantUser, csrfToken: req.csrfToken() });
-          });
-    //     });
-    //   });
-    // });
+          // });
+        // });
+      });
+    });
   });
 };
