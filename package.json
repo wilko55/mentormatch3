@@ -17,6 +17,7 @@
   "dependencies": {
     "axios": "^0.7.0",
     "base64-url": "^1.2.2",
+    "base64url": "^2.0.0",
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.13.2",
     "bookshelf": "^0.9.4",

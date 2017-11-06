@@ -111,6 +111,7 @@ const models = require('./models');
 
 require('./routes/unauthorised.js')(app);
 require('./routes/profile.js')(app);
+require('./routes/matches.js')(app);
 require('./routes/auth.js')(app, passport);
 
 require('./helpers/passport')(passport, models.user);

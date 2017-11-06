@@ -14,7 +14,9 @@ module.exports = {
     if (req.isAuthenticated()) {
       next();
     } else {
-      req.session.destroy();
+      if (req.session) {
+        req.session.destroy();
+      }
       res.redirect('/');
     }
   },
