@@ -39,7 +39,6 @@ module.exports = {
     // if building query to get mentors
     if (mentor === true && (toDevelopSet > 0)) {
       // user toDevelopCount to track how many times the first for loop has run through - goes through each of the toDevelop skill columns
-      let toDevelopCount = 0;
       for (let z = 1; z <= 6; z += 1) {
         // Iterator keeps track of when to not add the final ' OR ' to query in an iteration of the inside loop
         let iterator = 1;
@@ -59,7 +58,6 @@ module.exports = {
             iterator += 1;
           }
         }
-        toDevelopCount += 1;
 
         // Joins all but the last internal match query with this
         if (z < 6) {
@@ -68,7 +66,6 @@ module.exports = {
       }
       query += " ) )";
     } else if (mentor === false && (toOfferSet > 0)) {
-      let toOfferCount = 1;
       for (let h = 1; h <= 6; h += 1) {
         let iterator = 1;
         if (h === 1) {

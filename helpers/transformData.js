@@ -109,9 +109,9 @@ module.exports = {
   markAsMessaged: function (mentorList, recepients) {
     let mentors = mentorList;
     let recepientIds = recepients;
-    for (let j = 0; j < mentors.length; j++) {
-      for (let i = 0; i < recepientIds.length; i++) {
-        if (recepientIds[i].recepientId === mentors[j].id) {
+    for (let j = 0; j < mentors.length; j += 1) {
+      for (let i = 0; i < recepientIds.length; i += 1) {
+        if (recepientIds[i] === mentors[j].id) {
           mentors[j].messaged = true;
         }
       }
