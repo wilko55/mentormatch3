@@ -1,6 +1,7 @@
 "use strict";
 
 const moment = require('moment');
+const base64url = require('base64url');
 
 module.exports = function (sequelize, DataTypes) {
   let Email = sequelize.define("email",
@@ -44,12 +45,24 @@ module.exports = function (sequelize, DataTypes) {
   };
 
   Email.findInboxEmails = function (id) {
-    return sequelize.query('select emailLog.id, type, timestamp, emailBody, name from emailLog inner join mentors on mentors.id=emailLog.recepientId where (emailLog.type = "email" AND emailLog.senderId = ' + id + ') OR (emailLog.type = "reply" AND emailLog.senderId = ' + id + ') ORDER BY emailLog.id DESC', { type: sequelize.QueryTypes.SELECT })
+    return sequelize.query('select emailLog.id, type, timestamp, emailBody, name from emailLog inner join mentors on mentors.id=emailLog.recepientId where (emailLog.type = "email" AND emailLog.senderId = ' + id + ') OR (emailLog.type = "reply" AND emailLog.recepientId = ' + id + ') ORDER BY emailLog.timestamp DESC', { type: sequelize.QueryTypes.SELECT })
     .then((data) => {
-      return data.map((el) => {
-        el.timestamp = moment(el.timestamp).format('HH:MM DD-MM-YYYY');
+      let emails = {
+        email: [],
+        reply: []
+      };
+      data.map((el) => {
+        el.timestamp = moment(el.timestamp).format('HH:MM Do MMM YYYY');
+        el.emailBody = el.emailBody.replace(/<br \/>/g, ' ');
         return el;
       });
+      data.forEach((el) => {
+        emails[el.type].push(el);
+        if (el.type === 'reply') {
+          el.idHash = base64url.encode('id=' + el.id);
+        }
+      });
+      return emails;
     });
   };
 

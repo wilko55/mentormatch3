@@ -13,46 +13,11 @@ module.exports = {
   getInbox: (req, res) => {
     Email.findInboxEmails(req.user.id)
     .then((data) => {
-      console.log('!!', data)
-    // })
-
-    // DB.knex('emailLog').select('name', 'emailLog.id', 'type', 'timestamp', 'emailBody').join('mentors', 'mentors.id', '=', 'emailLog.recepientId')
-    //   .where({ 'emailLog.senderId': req.user.id })
-    //   .andWhere({ 'emailLog.type': 'email' })
-    //   .orWhere({ 'emailLog.senderId': req.user.id })
-    //   .andWhere({ 'emailLog.type': 'reply' })
-    //   .orderBy('emailLog.id', 'desc')
-    //   .select()
-    //   .then(function (sentEmails) {
-    //     let i;
-    //     for (i = 0; i < sentEmails.length; i += 1) {
-    //       if (typeof sentEmails[i].emailBody != null) {
-    //         sentEmails[i].emailBody = sentEmails[i].emailBody.replace(/<br \/>/g, ' ');
-    //       }
-    //     }
-    //     DB.knex('emailLog').select('name', 'mentors.id', 'email', 'timestamp', 'emailBody').join('mentors', 'mentors.id', '=', 'emailLog.senderId')
-    //     .where({ 'emailLog.recepientId': req.user.id, 'emailLog.type': 'email' })
-    //     .orWhere({ 'emailLog.recepientId': req.user.id })
-    //     .andWhere({ 'emailLog.type': 'reply' })
-    //     .orderBy('timestamp', 'desc')
-    //     .select()
-    //     .then(function (receivedEmails) {
-    //       let j;
-    //       for (j = 0; j < receivedEmails.length; j += 1) {
-    //         console.log(receivedEmails[j])
-    //         receivedEmails[j].idHash = base64url.encode('id=' + receivedEmails[j].id);
-    //         if (receivedEmails[j].emailBody == null) {
-    //           receivedEmails[j].emailBody = '';
-    //         } else {
-    //           receivedEmails[j].emailBody = receivedEmails[j].emailBody.replace(/<br \/>/g, ' ');
-    //         }
-    //       }
-          res.render('email-log', {
-            sent: data,
-            // received: receivedEmails,
-            title: config.title + ' - inbox' });
-        });
-      // });
+      res.render('email-log', {
+        sent: data.email,
+        received: data.reply,
+        title: config.title + ' - inbox' });
+    });
   },
   getEmail: (req, res) => {
     let realId;
