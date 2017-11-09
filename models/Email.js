@@ -1,5 +1,7 @@
 "use strict";
 
+const moment = require('moment');
+
 module.exports = function (sequelize, DataTypes) {
   let Email = sequelize.define("email",
     {
@@ -38,6 +40,16 @@ module.exports = function (sequelize, DataTypes) {
         field: 'id',
         allowNull: true
       }
+    });
+  };
+
+  Email.findInboxEmails = function (id) {
+    return sequelize.query('select emailLog.id, type, timestamp, emailBody, name from emailLog inner join mentors on mentors.id=emailLog.recepientId where (emailLog.type = "email" AND emailLog.senderId = ' + id + ') OR (emailLog.type = "reply" AND emailLog.senderId = ' + id + ') ORDER BY emailLog.id DESC', { type: sequelize.QueryTypes.SELECT })
+    .then((data) => {
+      return data.map((el) => {
+        el.timestamp = moment(el.timestamp).format('HH:MM DD-MM-YYYY');
+        return el;
+      });
     });
   };
 

@@ -137,6 +137,7 @@ module.exports = {
     return skillsObject;
   },
   transformUserSkillsToString(skillsListArray) {
+    console.log('skillsListArray', skillsListArray)
     let skillsListString = '';
     for (let i = 0; i < skillsListArray.length; i++) {
       skillsListString += skillsListArray[i].replace(/([A-Z])/g, ' $1')
@@ -146,6 +147,7 @@ module.exports = {
       }) + ',';
     }
     skillsListString = skillsListString.slice(0, -1);
+    console.log('skillsListString', skillsListString)
     return skillsListString;
   },
   gotAdditionalExperience(userData) {

@@ -13,48 +13,44 @@ module.exports = {
   getProfile: (req, res) => {
     let dormantUser = req.user.dormant === 1;
 
-    if (dormantUser) {
-      res.render('dormant');
-    } else {
-      req.session.completedProfile = {
-        toDevelop: true,
-        toOffer: true
-      };
+    req.session.completedProfile = {
+      toDevelop: true,
+      toOffer: true
+    };
 
-      let l;
-      for (l = 1; l <= 6; l += 1) {
-        if (req.user['toDevelop' + l]) {
-          req.session.completedProfile.toDevelop = false;
-        }
-        if (req.user['toOffer' + l]) {
-          req.session.completedProfile.toOffer = false;
-        }
+    let l;
+    for (l = 1; l <= 6; l += 1) {
+      if (req.user['toDevelop' + l]) {
+        req.session.completedProfile.toDevelop = false;
+      }
+      if (req.user['toOffer' + l]) {
+        req.session.completedProfile.toOffer = false;
+      }
+    }
+
+    SkillsList.findAllUserSkills(req.user.id)
+    .then((skills) => {
+      let realMinGrade = transformData.convertGrade(req.user.minimumMentorGrade);
+      let skillsListString = transformData.transformUserSkillsToString(skills.userSkills);
+      let skillsListForProfile = transformData.transformUserSkillsToString(skills.userSkills).replace(/,/g, ', ');
+
+      let errorMessage = '';
+      if (req.query.valid === 'false') {
+        errorMessage = 'Maximum emails sent this week. Please come back on Monday for a new allocation.';
       }
 
-      SkillsList.findAllUserSkills(req.user.id)
-      .then((skills) => {
-        let realMinGrade = transformData.convertGrade(req.user.minimumMentorGrade);
-        let skillsListString = transformData.transformUserSkillsToString(skills.userSkills);
-        let skillsListForProfile = transformData.transformUserSkillsToString(skills.userSkills).replace(/,/g, ', ');
-
-        let errorMessage = '';
-        if (req.query.valid === 'false') {
-          errorMessage = 'Maximum emails sent this week. Please come back on Monday for a new allocation.';
-        }
-
-        res.render('profile', {
-          title: config.title + ' - Profile',
-          errorMessage: errorMessage,
-          skillsList: config.skillsList,
-          completedProfile: req.session.completedProfile,
-          dormantUser: dormantUser,
-          isAdmin: req.user.admin,
-          realMinGrade: realMinGrade,
-          skillsListString: skillsListString,
-          skillsListForProfile: skillsListForProfile
-        });
+      res.render('profile', {
+        title: config.title + ' - Profile',
+        errorMessage: errorMessage,
+        skillsList: config.skillsList,
+        completedProfile: req.session.completedProfile,
+        dormantUser: dormantUser,
+        isAdmin: req.user.admin,
+        realMinGrade: realMinGrade,
+        skillsListString: skillsListString,
+        skillsListForProfile: skillsListForProfile
       });
-    }
+    });
   },
   editProfile: (req, res) => {
     let dormantUser = (req.user.dormant === 1);

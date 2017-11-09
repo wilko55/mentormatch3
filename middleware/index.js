@@ -49,5 +49,12 @@ module.exports = {
     } else {
       next();
     }
+  },
+  checkForDormantUser: function (req, res, next) {
+    if (req.user && req.user.dormant === 1 && (req.url === '/profile' && req.url !== '/matches')) {
+      res.render('dormant');
+    } else {
+      next();
+    }
   }
 };

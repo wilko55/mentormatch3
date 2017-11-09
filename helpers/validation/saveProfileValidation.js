@@ -43,7 +43,7 @@ module.exports = {
 
         return userSkillsObject;
       } else {
-        return userSkillsObject;
+        return false;
       }
     }
   }
