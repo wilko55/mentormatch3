@@ -17,6 +17,7 @@
   "dependencies": {
     "axios": "^0.7.0",
     "base64-url": "^1.2.2",
+    "base64url": "^2.0.0",
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.13.2",
     "bookshelf": "^0.9.4",
@@ -50,6 +51,8 @@
     "passport": "~0.1.17",
     "passport-linkedin": "^1.0.0",
     "passport-local": "^0.1.6",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "request": "^2.74.0",
     "sequelize": "^4.5.0",
     "serve-favicon": "^2.3.0",
@@ -74,7 +77,8 @@
     "sinon-as-promised": "^4.0.2",
     "sinon-chai": "^2.14.0",
     "sinon-stub-promise": "^4.0.0",
-    "superagent": "^3.4.1"
+    "superagent": "^3.4.1",
+    "webpack": "^3.8.1"
   },
   "main": "app.js",
   "directories": {

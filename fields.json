@@ -1,0 +1,35 @@
+{
+  "locations": [
+    { "value": "London", "label": "London" },
+    { "value": "East of England", "label": "East of England" },
+    { "value": "Midlands", "label": "Midlands" },
+    { "value": "North East", "label": "North East" },
+    { "value": "North West", "label": "North West" },
+    { "value": "South East", "label": "South East" },
+    { "value": "South West", "label": "South West" },
+    { "value": "Yorkshire and Humber", "label": "Yorkshire and Humber" },
+    { "value": "Northen Ireland", "label": "Northern Ireland" },
+    { "value": "Scotland", "label": "Scotland" },
+    { "value": "Wales", "label": "Wales" },
+    { "value": "Overseas", "label": "Overseas" },
+  ],
+  "grades": [
+    { "value": "0", "label": "AO"},
+    { "value": "1", "label": "AA"},
+    { "value": "2", "label": "EO"},
+    { "value": "3", "label": "HEO"},
+    { "value": "4", "label": "HEO(D) / Faststreamer"},
+    { "value": "5", "label": "SEO"},
+    { "value": "6", "label": "G7"},
+    { "value": "7", "label": "G6"},
+    { "value": "8", "label": "SCS"}
+  ],
+  "areasFamilarWith": [
+    { "id": "additional-bame", "name": "bame", "label": "BAME issues" },
+    { "id": "additional-dependents", "name": "dependents", "label": "Caring for dependents" },
+    { "id": "additional-disability-issues", "name": "disability", "label": "Disability issues" },
+    { "id": "additional-LGBTQ", "name": "lgbtq", "label": "LGBTQ issues" },
+    { "id": "additional-part-time", "name": "partTime", "label": "Part time working" },
+    { "id": "additional-gender-issues", "name": "gender", "label": "Gender issues" }
+  ]
+}

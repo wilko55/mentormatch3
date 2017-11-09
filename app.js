@@ -17,7 +17,7 @@ const RedisStore = require('connect-redis')(session);
 
 // const scheduler = require('./services/scheduler');
 // const DB = require('./models/db');
-// const middleware = require('./middleware');
+const middleware = require('./middleware');
 const csurf = require('csurf');
 
 const csrfProtection = csurf({ cookie: true });
@@ -84,6 +84,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(middleware.checkForDormantUser);
+
 if (process.env.NODE_ENV === "production") {
   app.all(/.*/, function (req, res, next) {
     let host = req.header("host");
@@ -111,6 +113,8 @@ const models = require('./models');
 
 require('./routes/unauthorised.js')(app);
 require('./routes/profile.js')(app);
+require('./routes/matches.js')(app);
+require('./routes/email.js')(app);
 require('./routes/auth.js')(app, passport);
 
 require('./helpers/passport')(passport, models.user);

@@ -99,5 +99,13 @@ module.exports = function (sequelize, DataTypes) {
     ] } });
   };
 
+  User.findMatches = function (id, query) {
+    return sequelize.query('select * from mentors LEFT OUTER JOIN skillsList ON mentors.id=skillsList.userId where mentors.id != :userId AND pauseMentoringComms = 0 ' + query, { replacements: { userId: id }, type: sequelize.QueryTypes.SELECT });
+  };
+
+  User.findFilteredMatches = function (id, query) {
+    return sequelize.query('select * from mentors LEFT OUTER JOIN skillsList ON mentors.id=skillsList.userId where mentors.id != :userId AND pauseMentoringComms = 0 ' + query, { replacements: { userId: id }, type: sequelize.QueryTypes.SELECT });
+  };
+
   return User;
 };
